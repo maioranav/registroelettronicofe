@@ -3,11 +3,10 @@ import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { IToken, myTokenFetch } from "../../app/reducers/loginSlice";
+import { myTokenFetch } from "../../app/reducers/loginSlice";
 import { LoginError } from "./LoginError/LoginError";
-import { IProfile, myProfileFetch } from "../../app/reducers/profileSlice";
+import { myProfileFetch } from "../../app/reducers/profileSlice";
 import useDocumentTitle from "../../app/useDocumentTitle";
-import { RootState } from "../../app/store";
 
 export const Login = () => {
   useDocumentTitle("UniVincenzo Login");
@@ -71,8 +70,8 @@ export const Login = () => {
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
-              {loginToken.status == "loading" && <Spinner animation="border" variant="primary" />}
-              {loginToken.status == "idle" && !loginToken.token && <LoginError />}
+              {loginToken.status === "loading" && <Spinner animation="border" variant="primary" />}
+              {loginToken.status === "idle" && !loginToken.token && <LoginError />}
             </div>
             <p className="text-center mt-2">
               Forgot <Link to="/">password?</Link>
