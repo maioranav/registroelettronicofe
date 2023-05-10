@@ -2,8 +2,8 @@ import { configureStore, ThunkAction, Action, Reducer, combineReducers } from "@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
-import loginSlice from "./reducers/loginSlice";
-import profileSlice from "./reducers/profileSlice";
+import loginSlice, { IToken } from "./reducers/loginSlice";
+import profileSlice, { IProfile } from "./reducers/profileSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,11 +13,11 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  profile: loginSlice as Reducer,
-  myProfile: profileSlice as Reducer,
+  profile: loginSlice,
+  myProfile: profileSlice,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer) as typeof rootReducer;
 
 export const store = configureStore({
   reducer: persistedReducer,
