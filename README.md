@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Registro Elettronico Universitario
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+Lo scopo del progetto è costruire una dashboard universitaria unificata (una sorta di registro elettronico) che permetta lo scambio di circolari, calendario lezioni, contatto di segreteria, lettura presenze, e che sia responsive, lightweight e semplice da utilizzare.
+
+## RestAPI
+
+Il software è collegato ad un backend scritto in Java SpringBoot sempre da me realizzato, disponibile [qui](https://github.com/maioranav/registroelettronico).
 
 ## Available Scripts
 
