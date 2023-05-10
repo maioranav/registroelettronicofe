@@ -7,14 +7,15 @@ import { IToken, myTokenFetch } from "../../app/reducers/loginSlice";
 import { LoginError } from "./LoginError/LoginError";
 import { IProfile, myProfileFetch } from "../../app/reducers/profileSlice";
 import useDocumentTitle from "../../app/useDocumentTitle";
+import { RootState } from "../../app/store";
 
 export const Login = () => {
   useDocumentTitle("UniVincenzo Login");
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const loginToken = useAppSelector((state) => state.profile as { token: IToken; status: string });
-  const myProfile = useAppSelector((state) => state.myProfile as { myProfile: IProfile; status: string });
+  const loginToken = useAppSelector((state) => state.profile);
+  const myProfile = useAppSelector((state) => state.myProfile);
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
