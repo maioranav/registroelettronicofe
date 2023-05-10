@@ -3,9 +3,15 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./HomePage.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const [shownImage, setShownImage] = useState(false);
+
+  const handleClick = () => {
+    navigate("/login");
+  };
 
   return (
     <>
@@ -29,7 +35,9 @@ export const HomePage = () => {
         <Col xs={12} lg={6} className="d-flex p-5 justify-content-center rightColumn flex-column align-items-center align-items-md-start">
           <h1>UniVincenzo.it</h1>
           <h3 className="d-none d-md-block w-75">Dove Innovazione e Tecnologia, rappresentano il futuro!</h3>
-          <Button className="mt-4 rounded-4">Log In</Button>
+          <Button className="mt-4 rounded-4" onClick={handleClick}>
+            Log In
+          </Button>
         </Col>
       </Row>
     </>
