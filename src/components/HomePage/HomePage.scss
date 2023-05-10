@@ -1,6 +1,33 @@
+.homePageRow {
+}
 .leftColumn {
   height: 100vh;
   @media screen and (max-width: 990px) {
     height: 75vh;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  > div {
+    display: flex;
+    padding: 0 9rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    img {
+      aspect-ratio: 1/1;
+      width: 100%;
+      height: auto;
+    }
+  }
+  h6 {
+    margin-top: 20px;
+  }
+}
+
+.rightColumn {
+  height: 100vh;
+  @media screen and (max-width: 990px) {
+    height: 25vh;
   }
 }
