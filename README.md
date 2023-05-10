@@ -6,6 +6,13 @@ Lo scopo del progetto è costruire una dashboard universitaria unificata (una so
 
 Il software è collegato ad un backend scritto in Java SpringBoot sempre da me realizzato, disponibile [qui](https://github.com/maioranav/registroelettronico).
 
+## Stack Utilizzato
+
+- React
+- Typescript
+- Redux - Persist - Encrypt
+- Bootstrap
+
 ## Available Scripts
 
 In the project directory, you can run:
