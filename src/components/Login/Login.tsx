@@ -8,6 +8,7 @@ import { LoginError } from "./LoginError/LoginError";
 import { myProfileFetch } from "../../app/reducers/profileSlice";
 import useDocumentTitle from "../../app/useDocumentTitle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const Login = () => {
   useDocumentTitle("UniVincenzo - Login");
@@ -56,7 +57,7 @@ export const Login = () => {
 
   return (
     <Col md={6} sm={12} className="loginMain d-flex flex-column justify-content-center align-items-center">
-      <LazyLoadImage src="./logo192.png" width={"100px"} height={"100px"}></LazyLoadImage>
+      <LazyLoadImage src="./logo192.png" alt="Logo" effect="blur" width={"100px"} height={"100px"}></LazyLoadImage>
       <div className="Auth-form-container">
         <form className="Auth-form" onSubmit={handleLogin}>
           <div className="Auth-form-content">
