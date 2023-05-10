@@ -2,8 +2,8 @@ import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/t
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
-import loginSlice, { IToken } from "./reducers/loginSlice";
-import profileSlice, { IProfile } from "./reducers/profileSlice";
+import loginSlice from "./reducers/loginSlice";
+import profileSlice from "./reducers/profileSlice";
 
 const persistConfig = {
   key: "root",
