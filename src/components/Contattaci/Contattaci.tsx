@@ -1,5 +1,5 @@
 import useDocumentTitle from "../../app/useDocumentTitle";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { Button, Form, Col, Row, Alert } from "react-bootstrap";
@@ -12,17 +12,9 @@ export const Contattaci = () => {
 
   const initialStateForm = { firstname: "", lastname: "", email: "", subject: "", message: "", gpdrconsent: false };
 
-  const myProfile = useAppSelector((state) => state.myProfile as { myProfile: IProfile; status: string });
-  const navigate = useNavigate();
   const [formState, setFormState] = useState({ ...initialStateForm });
   const [showSent, setShowSent] = useState(false);
   const [captchaState, setCaptchaState] = useState("none");
-
-  useEffect(() => {
-    if (!myProfile.myProfile?.id) {
-      navigate("/");
-    }
-  }, [myProfile]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -63,50 +55,50 @@ export const Contattaci = () => {
 
   return (
     <Row className="d-flex justify-content-center" style={{ marginTop: "3rem" }}>
-      <Col lg={6}>
-        <h2 className="my-3">Contact me</h2>
+      <Col lg={6} className="bg-white p-5 rounded-3 shadow">
+        <h2 className="my-3 px-2">Contatta la segreteria</h2>
         <Form className="d-flex flex-wrap" onSubmit={handleSubmit}>
-          <Col xs={12} md={6} className="mb-3">
+          <Col xs={12} md={6} className="mb-3 px-2">
             <label className="form-label" htmlFor="firstname">
-              First Name
+              Nome
             </label>
             <input className="form-control" type="text" id="firstname" onChange={handleChange} value={formState.firstname} />
           </Col>
-          <Col xs={12} md={6} className="mb-3">
+          <Col xs={12} md={6} className="mb-3 px-2">
             <label className="form-label" htmlFor="lastname">
-              Last Name
+              Cognome
             </label>
             <input className="form-control" type="text" id="lastname" value={formState.lastname} onChange={handleChange} />
           </Col>
-          <Col xs={12} md={6} className="mb-3">
+          <Col xs={12} md={6} className="mb-3 px-2">
             <label className="form-label" htmlFor="email">
               Email
             </label>
             <input className="form-control" type="email" id="email" value={formState.email} onChange={handleChange} />
           </Col>
-          <Col xs={12} md={6} className="mb-3">
+          <Col xs={12} md={6} className="mb-3 px-2">
             <label className="form-label" htmlFor="subject">
-              Subject
+              Oggetto
             </label>
             <select className="form-control" id="subject" value={formState.subject} onChange={handleSelect}>
-              <option>Subject no. One</option>
-              <option>Subject no. Two</option>
-              <option>Subject no. Three</option>
+              <option>Informazioni Generali</option>
+              <option>Informazioni sulle Lezioni</option>
+              <option>Ho perso la password</option>
             </select>
           </Col>
-          <Col xs={12} className="mb-3">
+          <Col xs={12} className="mb-3 px-2">
             <label className="form-label" htmlFor="message">
-              Message
+              Messaggio
             </label>
             <textarea className="form-control" id="message" onChange={handleText} value={formState.message} />
           </Col>
-          <Col xs={12} className="mb-3">
+          <Col xs={12} className="mb-3 px-2">
             <input type="checkbox" id="gpdrconsent" required checked={formState.gpdrconsent} onChange={handleConsent} />
             <label className="form-label" htmlFor="gpdrconsent">
               GPDR Consent Checkbox
             </label>
           </Col>
-          <Col xs={12} className="mb-3">
+          <Col xs={12} className="mb-3 px-2">
             <ReCaptcha
               siteKey={process.env.REACT_APP_GOOGLE_SITEKEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}
               theme="light"
@@ -122,17 +114,35 @@ export const Contattaci = () => {
               }}
             />
           </Col>
-          <Button className="btn btn-primary" type="submit">
-            Send
-          </Button>
+          <div className="d-flex justify-content-between align-items-center w-100 flex-wrap">
+            <div className="d-flex">
+              <Button className="btn-primary mx-2" type="submit">
+                Invia
+              </Button>
+              <Button className="btn-warning mx-2" type="reset">
+                Reset
+              </Button>
+            </div>
+            <Link className="m-2 m-md-0" to="/">
+              Torna alla HomePage
+            </Link>
+          </div>
         </Form>
         {showSent && (
           <Alert variant={"success"} className="mt-3">
-            Your message was sent!
+            Il tuo messaggio è stato inviato!
           </Alert>
         )}
-        {captchaState == "expired" && <Alert className="mt-3">Captcha verification expired!</Alert>}
-        {captchaState == "error" && <Alert className="mt-3">Invalid captcha verification!</Alert>}
+        {captchaState == "expired" && (
+          <Alert variant={"danger"} className="mt-3">
+            La sessione reCaptcha è scaduta!
+          </Alert>
+        )}
+        {captchaState == "error" && (
+          <Alert variant={"danger"} className="mt-3">
+            Verifica reCaptcha non riuscita!
+          </Alert>
+        )}
       </Col>
     </Row>
   );
