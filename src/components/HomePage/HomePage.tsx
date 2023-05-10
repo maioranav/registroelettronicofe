@@ -36,7 +36,7 @@ export const HomePage = () => {
           <h1>UniVincenzo.it</h1>
           <h3 className="d-none d-md-block w-75">Dove Innovazione e Tecnologia, rappresentano il futuro!</h3>
           <Button className="mt-4 rounded-4" onClick={handleClick}>
-            Log In
+            Accedi
           </Button>
         </Col>
       </Row>
