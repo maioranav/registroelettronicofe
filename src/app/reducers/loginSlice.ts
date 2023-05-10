@@ -4,32 +4,41 @@ const url = process.env.REACT_APP_APIURL;
 
 export const cleanToken = createAction("CLEAN_TOKEN");
 
-interface IToken {
+export interface IToken {
+  username: string;
   accessToken: string;
-  refreshToken: string;
+  tokenType: string;
+  role: IRole[];
+}
+
+export interface IRole {
+  id: number;
+  roleName: string;
 }
 
 export interface loginDTO {
-  email: string;
+  username: string;
   password: string;
 }
 
 const initialState = {
   token: {
     accessToken: "",
-    refreshToken: "",
+    username: "",
+    tokenType: "",
+    role: [],
   } as IToken,
   status: "idle",
 };
 
-export const myTokenFetch = createAsyncThunk("fetch-token", async ({ email, password }: loginDTO) => {
+export const myTokenFetch = createAsyncThunk("fetch-token", async ({ username, password }: loginDTO) => {
   try {
     const response = await fetch(url + "/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        username,
+        password,
       }),
     });
     if (response.ok) {
