@@ -47,10 +47,13 @@ export const myTokenFetch = createAsyncThunk("fetch-token", async ({ username, p
       const data: IToken = await response.json();
       return data;
     } else {
-      console.log("errore");
+      let res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
     }
   } catch (error) {
     console.log(error);
+    return Promise.reject();
   }
 });
 
