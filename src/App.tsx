@@ -6,6 +6,7 @@ import { Contattaci } from "./components/Contattaci/Contattaci";
 import { Logout } from "./components/Logout/Logout";
 import { NotFound } from "./components/NotFound/NotFound";
 import { HomePage } from "./components/HomePage/HomePage";
+import { Segreteria } from "./components/Segreteria/Segreteria";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/segreteria" element={<Segreteria />} />
+          <Route path="/dashstudente" element={<Segreteria />} />
+          <Route path="/dashdocente" element={<Segreteria />} />
           <Route path="/contattaci" element={<Contattaci />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
