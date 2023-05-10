@@ -4,8 +4,10 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import "./HomePage.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../app/useDocumentTitle";
 
 export const HomePage = () => {
+  useDocumentTitle("UniVincenzo - Home");
   const navigate = useNavigate();
   const [shownImage, setShownImage] = useState(false);
 
