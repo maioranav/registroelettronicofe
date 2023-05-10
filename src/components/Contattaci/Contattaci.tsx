@@ -1,11 +1,9 @@
 import useDocumentTitle from "../../app/useDocumentTitle";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useAppSelector } from "../../app/hooks";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import { Button, Form, Col, Row, Alert } from "react-bootstrap";
 import ReCaptcha from "@matt-block/react-recaptcha-v2";
 import "./Contattaci.scss";
-import { IProfile } from "../../app/reducers/profileSlice";
 
 export const Contattaci = () => {
   useDocumentTitle("Contattaci");
