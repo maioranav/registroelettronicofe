@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { cleanToken } from "../../app/reducers/loginSlice";
 import "./Logout.scss";
+import { cleanProfile } from "../../app/reducers/profileSlice";
 
 export const Logout = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ export const Logout = () => {
 
   const logout = async () => {
     await dispatch(cleanToken());
+    await dispatch(cleanProfile());
   };
 
   useEffect(() => {

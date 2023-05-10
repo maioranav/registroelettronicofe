@@ -1,6 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const url = process.env.REACT_APP_APIURL;
+
+export const cleanProfile = createAction("CLEAN_PROFILE");
 
 export interface IProfile {
   id?: number;
@@ -48,7 +50,8 @@ const profileSlice = createSlice({
       })
       .addCase(myProfileFetch.rejected, (state) => {
         state.status = "failed";
-      });
+      })
+      .addCase(cleanProfile, (state) => (state = initialState));
   },
 });
 
