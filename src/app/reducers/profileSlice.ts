@@ -5,12 +5,10 @@ const url = process.env.REACT_APP_APIURL;
 export interface IProfile {
   id?: number;
   email: string;
-  password: string;
+  password?: string;
+  username: string;
   name: string;
-  role?: string;
-  avatar?: string;
-  creationAt?: Date;
-  updatedAt?: Date;
+  surname: string;
 }
 
 const initialState = {

@@ -3,9 +3,9 @@ import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { myTokenFetch } from "../../app/reducers/loginSlice";
+import { IToken, myTokenFetch } from "../../app/reducers/loginSlice";
 import { LoginError } from "./LoginError/LoginError";
-import { myProfileFetch } from "../../app/reducers/profileSlice";
+import { IProfile, myProfileFetch } from "../../app/reducers/profileSlice";
 import useDocumentTitle from "../../app/useDocumentTitle";
 
 export const Login = () => {
@@ -13,8 +13,8 @@ export const Login = () => {
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const loginToken = useAppSelector((state) => state.profile);
-  const myProfile = useAppSelector((state) => state.myProfile);
+  const loginToken = useAppSelector((state) => state.profile as { token: IToken; status: string });
+  const myProfile = useAppSelector((state) => state.myProfile as { myProfile: IProfile; status: string });
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -33,14 +33,22 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (loginToken.token?.access_token != "") {
-      dispatch(myProfileFetch(loginToken.token?.access_token));
+    if (loginToken.token?.accessToken != "") {
+      dispatch(myProfileFetch(loginToken.token?.accessToken));
     }
-  }, [loginToken.token?.access_token]);
+  }, [loginToken.token?.accessToken]);
 
   useEffect(() => {
     if (myProfile.myProfile?.id) {
-      navigate("/feed");
+      if (loginToken.token.role?.filter((el) => el.roleName.includes("ROLE_ADMIN")).length > 0) {
+        navigate("/segreteria");
+      } else if (loginToken.token.userType === "Studente") {
+        navigate("/dashstudente");
+      } else if (loginToken.token.userType === "Docente") {
+        navigate("/dashdocente");
+      } else {
+        navigate("/needactivation");
+      }
     }
   }, [myProfile]);
 

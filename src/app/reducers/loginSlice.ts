@@ -9,6 +9,7 @@ export interface IToken {
   accessToken: string;
   tokenType: string;
   role: IRole[];
+  userType: string;
 }
 
 export interface IRole {
@@ -27,6 +28,7 @@ const initialState = {
     username: "",
     tokenType: "",
     role: [],
+    userType: "",
   } as IToken,
   status: "idle",
 };
