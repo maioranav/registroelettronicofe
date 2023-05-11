@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useDocumentTitle from "../../app/useDocumentTitle";
 
 export const HomePage = () => {
-  useDocumentTitle("UniVincenzo - Home");
+  useDocumentTitle("Home");
   const navigate = useNavigate();
   const [shownImage, setShownImage] = useState(false);
 
