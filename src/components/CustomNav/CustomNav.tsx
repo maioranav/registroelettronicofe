@@ -7,7 +7,7 @@ export const CustomNav = () => {
       <Col className="d-none d-md-block" md={3}>
         COLONNA NAVBAR
       </Col>
-      <div></div>
+      <div className="fixed-bottom d-md-none">TEST</div>
     </>
   );
 };
