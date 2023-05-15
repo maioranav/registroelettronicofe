@@ -46,3 +46,33 @@
     }
   }
 }
+.appelliDiv {
+  width: 155px;
+  height: 100px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  &:nth-child(1) {
+    background-color: #e1e9f3;
+  }
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 10px;
+  }
+}
+
+.textAppelli {
+  font: {
+    style: normal;
+    weight: 500;
+    size: 12px;
+  }
+}
+
+.appelli {
+  > div {
+    width: unset;
+  }
+}
