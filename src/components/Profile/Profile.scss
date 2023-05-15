@@ -1,0 +1,14 @@
+.profileTop {
+  p {
+    &.greets {
+      font-weight: 500;
+      line-height: 29px;
+      font-size: 24px;
+    }
+    &.currdate {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+}

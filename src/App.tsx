@@ -7,6 +7,7 @@ import { Logout } from "./components/Logout/Logout";
 import { NotFound } from "./components/NotFound/NotFound";
 import { HomePage } from "./components/HomePage/HomePage";
 import { Segreteria } from "./components/Segreteria/Segreteria";
+import { Dashboard } from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/segreteria" element={<Segreteria />} />
-          <Route path="/dashstudente" element={<Segreteria />} />
-          <Route path="/dashdocente" element={<Segreteria />} />
+          <Route path="/dashstudente" element={<Dashboard variante="studente" />} />
+          <Route path="/dashdocente" element={<Dashboard variante="docente" />} />
           <Route path="/contattaci" element={<Contattaci />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
