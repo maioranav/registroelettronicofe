@@ -10,3 +10,30 @@
     }
   }
 }
+.sideBar {
+  .navLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  height: 100vh;
+  box-shadow: 0px 4px 18px rgba(114, 128, 255, 0.25);
+  .sideBarLink {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    text-decoration: none !important;
+    color: black;
+    &:hover {
+      color: #9da7ff;
+    }
+    &.active {
+      color: #7280ff;
+    }
+    > img {
+      margin-right: 10px;
+    }
+  }
+}

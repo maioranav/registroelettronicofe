@@ -3,6 +3,7 @@ import "./CustomNav.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
+import { Profile } from "../Profile/Profile";
 
 export const CustomNav = () => {
   const location = useLocation();
@@ -19,8 +20,47 @@ export const CustomNav = () => {
 
   return (
     <>
-      <Col className="d-none d-md-block" md={3}>
-        COLONNA NAVBAR
+      <Col className="sideBar d-none d-md-flex flex-column justify-content-between p-5" md={3} lg={2}>
+        <div className="navLogo">
+          <img src="./logo192.png" alt="Logo" width={"100px"} height={"100px"} />
+          UniVincenzo.it
+        </div>
+        <div className="d-flex flex-column">
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Home
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Corsi
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Docenti
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Studenti
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Messaggi
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Lezioni
+          </Link>
+        </div>
+        <div className="d-flex flex-column">
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Impostazioni
+          </Link>
+          <Link to="/" className="sideBarLink">
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            Logout
+          </Link>
+        </div>
       </Col>
       <div className="fixed-bottom d-flex d-md-none justify-content-evenly mb-3 navBarDown">
         <Link to={homeLink}>
