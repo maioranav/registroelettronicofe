@@ -1,0 +1,54 @@
+.calendarioDashMobile {
+  > h6 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    margin: 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+.nextLessons {
+  height: 200px;
+  width: 100%;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: {
+    image: url("../../../../public/imgs/mobilecalendarbg.png");
+    position: center;
+    size: cover;
+  }
+  .mobileCalendarNextLesson {
+    width: 120px;
+    height: 120px;
+    background-color: white;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 17px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    p {
+      &:first-child {
+        font-size: 12px;
+      }
+      &:nth-child(2) {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      &:nth-child(3) {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.circolariCorsiMobile {
+  > h5 {
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  ul {
+    padding: 0;
+    > li {
+      background-color: #f1f3ff;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #d0d3e4;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 13px;
+      height: 70px;
+      div:nth-child(1) {
+        width: 20%;
+      }
+      div:nth-child(2) {
+        width: 80%;
+      }
+      p {
+        margin: 4px 0;
+        &:first-child {
+          font-size: 14px;
+          font-weight: 500;
+        }
+        &:nth-child(2) {
+          font-size: 12px;
+          font-weight: 400;
+        }
+        &:nth-child(3) {
+          font-size: 9px;
+          font-weight: 500;
+        }
+      }
+      .iconaMessaggio {
+        font-size: 38px;
+      }
+    }
+  }
+}
