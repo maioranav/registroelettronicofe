@@ -26,7 +26,7 @@ export const Dashboard = ({ variante }: IDashProps) => {
     <>
       <Row>
         <CustomNav />
-        <Col xs={12} md={9}>
+        <Col xs={12} md={9} lg={10}>
           <Container className="px-4">
             <Profile variante={variante} />
             <DashCalendar />
