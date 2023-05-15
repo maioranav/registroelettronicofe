@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Corso } from "../custominterfaces";
 
 const url = process.env.REACT_APP_APIURL;
 
@@ -11,6 +12,7 @@ export interface IProfile {
   username: string;
   name: string;
   surname: string;
+  corsi?: Corso[];
 }
 
 const initialState = {
