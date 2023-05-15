@@ -1,0 +1,12 @@
+.navBarDown {
+  img {
+    filter: saturate(20%);
+    &:hover {
+      cursor: pointer;
+      filter: saturate(60%);
+    }
+    &.active {
+      filter: saturate(100%);
+    }
+  }
+}

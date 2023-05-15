@@ -5,7 +5,7 @@ import { DashCalendar } from "./DashCalendar/DashCalendar";
 import { DashMsgs } from "./DashMsgs/DashMsgs";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CustomNav } from "../CustomNav/CustomNav";
 
 interface IDashProps {
