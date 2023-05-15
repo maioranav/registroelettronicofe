@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import loginSlice from "./reducers/loginSlice";
 import profileSlice from "./reducers/profileSlice";
+import messageSlice from "./reducers/messageSlice";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   profile: loginSlice,
   myProfile: profileSlice,
+  msgs: messageSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) as typeof rootReducer;
