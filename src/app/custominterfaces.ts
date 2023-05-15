@@ -40,3 +40,12 @@ export interface Docente {
   username: string;
   email: string;
 }
+
+export interface Studente {
+  id: number;
+  name: string;
+  surname: string;
+  username: string;
+  email: string;
+  corsi?: Corso[];
+}
