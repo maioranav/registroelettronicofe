@@ -6,6 +6,7 @@ import { DashMsgs } from "./DashMsgs/DashMsgs";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CustomNav } from "../CustomNav/CustomNav";
 
 interface IDashProps {
   variante: string;
@@ -24,7 +25,8 @@ export const Dashboard = ({ variante }: IDashProps) => {
   return (
     <>
       <Row>
-        <Col xs={12}>
+        <CustomNav />
+        <Col xs={12} md={9}>
           <Container className="px-4">
             <Profile variante={variante} />
             <DashCalendar />
