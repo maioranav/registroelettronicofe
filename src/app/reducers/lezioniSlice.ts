@@ -10,6 +10,7 @@ export interface ILezione {
   data: Date;
   presenze: Studente[];
   corso: Corso;
+  orario: number;
 }
 
 interface ILezioneFetch {
