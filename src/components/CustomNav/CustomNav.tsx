@@ -56,7 +56,7 @@ export const CustomNav = () => {
             <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
             Impostazioni
           </Link>
-          <Link to="/" className="sideBarLink">
+          <Link to="/logout" className="sideBarLink">
             <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
             Logout
           </Link>
