@@ -1,16 +1,29 @@
 import { Col } from "react-bootstrap";
 import "./CustomNav.scss";
 import { Link, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+import { useEffect, useState } from "react";
 
 export const CustomNav = () => {
   const location = useLocation();
+  const loginToken = useAppSelector((state) => state.profile);
+  const [homeLink, setHomeLink] = useState("/dashboard");
+
+  useEffect(() => {
+    if (loginToken.token?.userType === "Studente") {
+      setHomeLink("/dashstudente");
+    } else if (loginToken.token?.userType === "Docente") {
+      setHomeLink("/dashdocente");
+    }
+  }, []);
+
   return (
     <>
       <Col className="d-none d-md-block" md={3}>
         COLONNA NAVBAR
       </Col>
       <div className="fixed-bottom d-flex d-md-none justify-content-evenly mb-3 navBarDown">
-        <Link to="/">
+        <Link to={homeLink}>
           <img
             src="./icons/navbar/home.svg"
             alt="Home"
