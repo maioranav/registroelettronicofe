@@ -5,7 +5,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { messagesFetch } from "../../../app/reducers/messageSlice";
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 
 interface IDashProps {
   variante: string;
@@ -15,7 +15,7 @@ export const DashMsgs = ({ variante }: IDashProps) => {
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile.token.accessToken);
   const myProfile = useAppSelector((state) => state.myProfile?.myProfile);
-  const msgs = useAppSelector((state) => state.msgs.messages?.content);
+  const msgs = useAppSelector((state) => state.msgs);
 
   useEffect(() => {
     if (variante === "studente") {
@@ -41,8 +41,12 @@ export const DashMsgs = ({ variante }: IDashProps) => {
         </span>
       </h5>
       <ul>
-        {msgs?.length > 0 &&
-          msgs.map((el) => (
+        {msgs.status === "loading" && <Spinner variant={"primary"} />}
+        {msgs.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
+
+        {msgs.status !== "failed" &&
+          msgs?.messages?.content.length > 0 &&
+          msgs.messages?.content.map((el) => (
             <li key={el.id} className="mb-3">
               <div className="d-flex justify-content-center">
                 <img src="./icons/messaggio.svg" alt="Messaggio" className="iconaMessaggio" />
