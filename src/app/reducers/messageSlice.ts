@@ -67,10 +67,13 @@ export const messagesFetch = createAsyncThunk("fetch-messages", async ({ accessT
       const data: PageableFetch<IMessage[]> = await response.json();
       return data;
     } else {
-      console.log("errore");
+      const res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
     }
   } catch (error) {
     console.log(error);
+    return Promise.reject(error);
   }
 });
 
