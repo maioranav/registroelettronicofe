@@ -50,6 +50,7 @@ interface IMessageFetch {
   elNo?: number;
   page?: number;
   sort?: string;
+  corsi?: Corso[];
 }
 
 export const messagesFetch = createAsyncThunk("fetch-messages", async ({ accessToken, elNo = 4, page = 0, sort }: IMessageFetch) => {
