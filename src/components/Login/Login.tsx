@@ -78,7 +78,7 @@ export const Login = () => {
               {loginToken.status === "failed" && <LoginError />}
             </div>
             <p className="text-center mt-2">
-              <Link to="/contattaci">Hai dimenticato la password?</Link>
+              <Link to="/recover">Hai dimenticato la password?</Link>
             </p>
           </div>
         </form>

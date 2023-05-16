@@ -1,5 +1,5 @@
 import useDocumentTitle from "../../app/useDocumentTitle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button, Form, Col, Row, Alert } from "react-bootstrap";
 import ReCaptcha from "@matt-block/react-recaptcha-v2";
@@ -13,6 +13,8 @@ export const Contattaci = () => {
   const [formState, setFormState] = useState({ ...initialStateForm });
   const [showSent, setShowSent] = useState(false);
   const [captchaState, setCaptchaState] = useState("none");
+
+  const { pathname } = useLocation();
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -121,9 +123,11 @@ export const Contattaci = () => {
                 Reset
               </Button>
             </div>
-            <Link className="m-2 m-md-0" to="/">
-              Torna alla HomePage
-            </Link>
+            {pathname !== "/contattaci" && (
+              <Link className="m-2 m-md-0" to="/">
+                Torna alla HomePage
+              </Link>
+            )}
           </div>
         </Form>
         {showSent && (

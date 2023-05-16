@@ -28,7 +28,8 @@ function App() {
           <Route path="/profilo" element={<EditProfilo />} />
           <Route path="/dashstudente" element={<Dashboard variante="studente" />} />
           <Route path="/dashdocente" element={<Dashboard variante="docente" />} />
-          <Route path="/contattaci" element={<Contattaci />} />
+          <Route path="/recover" element={<Contattaci />} />
+          <Route path="/contattaci" element={<Dashboard variante="contattaci" />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

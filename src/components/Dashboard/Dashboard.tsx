@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomNav } from "../CustomNav/CustomNav";
 import { PresenzeChart } from "../PresenzeChart/PresenzeChart";
+import { Contattaci } from "../Contattaci/Contattaci";
 
 interface IDashProps {
   variante: string;
@@ -28,22 +29,25 @@ export const Dashboard = ({ variante }: IDashProps) => {
       <Row>
         <CustomNav />
         <Col xs={12} md={9} lg={10}>
-          <Container className="px-4">
-            <Profile variante={variante} />
-            <DashCalendar />
-            {variante === "docente" ? (
-              <Row>
-                <Col xs={12} lg={6} className="d-none d-lg-block">
-                  <PresenzeChart />
-                </Col>
-                <Col xs={12} lg={6}>
-                  <DashMsgs variante={variante} />
-                </Col>
-              </Row>
-            ) : (
-              <DashMsgs variante={variante} />
-            )}
-          </Container>
+          {variante !== "contattaci" && (
+            <Container className="px-4">
+              <Profile variante={variante} />
+              <DashCalendar />
+              {variante === "docente" ? (
+                <Row>
+                  <Col xs={12} lg={6} className="d-none d-lg-block">
+                    <PresenzeChart />
+                  </Col>
+                  <Col xs={12} lg={6}>
+                    <DashMsgs variante={variante} />
+                  </Col>
+                </Row>
+              ) : (
+                <DashMsgs variante={variante} />
+              )}
+            </Container>
+          )}
+          {variante === "contattaci" && <Contattaci />}
         </Col>
       </Row>
     </>
