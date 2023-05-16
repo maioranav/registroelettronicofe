@@ -11,7 +11,6 @@ import { messagesFetch } from "../../app/reducers/messageSlice";
 export const Messaggi = () => {
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile?.token);
-  const myProfile = useAppSelector((state) => state.myProfile?.myProfile);
   const msgs = useAppSelector((state) => state.msgs);
   const location = useLocation();
 
