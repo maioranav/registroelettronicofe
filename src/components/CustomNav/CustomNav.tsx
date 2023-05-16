@@ -15,6 +15,8 @@ export const CustomNav = () => {
       setHomeLink("/dashstudente");
     } else if (loginToken.token?.userType === "Docente") {
       setHomeLink("/dashdocente");
+    } else {
+      setHomeLink("/segreteria");
     }
   }, []);
 
@@ -34,9 +36,7 @@ export const CustomNav = () => {
             <span>{myProfile.myProfile?.name}</span>
           </div>
           <Link
-            to={
-              loginToken.token?.userType === "Docente" ? "/dashdocente" : loginToken.token?.userType === "Studente" ? "/dashstudente" : "/segreteria"
-            }
+            to={homeLink}
             className={
               location.pathname === "/segreteria" || location.pathname === "/dashdocente" || location.pathname === "/dashstudente"
                 ? "sideBarLink active"
@@ -83,7 +83,9 @@ export const CustomNav = () => {
           <img
             src="./icons/navbar/home.svg"
             alt="Home"
-            className={location.pathname === "/dashstudente" || location.pathname === "/dashdocente" ? "active" : ""}
+            className={
+              location.pathname === "/dashstudente" || location.pathname === "/dashdocente" || location.pathname === "/segreteria" ? "active" : ""
+            }
           />
         </Link>
         <Link to="/calendario">

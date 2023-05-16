@@ -2,18 +2,24 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./DashCalendar.scss";
 import { IoIosArrowForward } from "react-icons/io";
-import { lezioniFetch } from "../../../app/reducers/lezioniSlice";
+import { lezioniFetch, lezioniFetchData } from "../../../app/reducers/lezioniSlice";
 import { format } from "date-fns";
+import { useLocation } from "react-router-dom";
 export const DashCalendar = () => {
   const corsi = useAppSelector((state) => state.myProfile?.myProfile?.corsi);
   const loginToken = useAppSelector((state) => state.profile?.token);
   const lezioni = useAppSelector((state) => state.lezioni);
   const dispatch = useAppDispatch();
+  const location = useLocation();
   let width = window.innerWidth;
   const [maxShow, setMaxShow] = useState(2);
 
   useEffect(() => {
-    dispatch(lezioniFetch({ accessToken: loginToken.accessToken, corsi: corsi, data: format(new Date(), "yyyy-MM-dd") }));
+    if (location.pathname !== "/segreteria") {
+      dispatch(lezioniFetch({ accessToken: loginToken.accessToken, corsi: corsi, data: format(new Date(), "yyyy-MM-dd") }));
+    } else {
+      dispatch(lezioniFetchData({ accessToken: loginToken.accessToken, data: format(new Date(), "yyyy-MM-dd") }));
+    }
   }, []);
 
   useEffect(() => {

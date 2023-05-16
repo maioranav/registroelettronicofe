@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { messagesFetch } from "../../../app/reducers/messageSlice";
 import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 interface IDashProps {
   variante: string;
@@ -16,6 +17,7 @@ export const DashMsgs = ({ variante }: IDashProps) => {
   const loginToken = useAppSelector((state) => state.profile.token.accessToken);
   const myProfile = useAppSelector((state) => state.myProfile?.myProfile);
   const msgs = useAppSelector((state) => state.msgs);
+  const location = useLocation();
 
   useEffect(() => {
     if (variante === "studente") {
@@ -32,7 +34,7 @@ export const DashMsgs = ({ variante }: IDashProps) => {
         <div className="d-flex align-items-center">
           {" "}
           <img src="./icons/note.svg" alt="Circolari" style={{ marginRight: "10px" }} />
-          Circolari dei tuoi corsi
+          Circolari {location.pathname !== "/segreteria" && "dei tuoi corsi"}
         </div>
         <span className="text-primary">
           {variante === "studente" && <HiBellAlert />}

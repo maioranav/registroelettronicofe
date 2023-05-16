@@ -15,7 +15,7 @@ export interface ILezione {
 
 interface ILezioneFetch {
   accessToken: string;
-  corsi: Corso[] | undefined;
+  corsi?: Corso[] | undefined;
   data: Date | string;
 }
 
@@ -42,12 +42,39 @@ export const lezioniFetch = createAsyncThunk("fetch-lezioni", async ({ accessTok
   }
 });
 
+export const lezioniFetchData = createAsyncThunk("fetch-lezioni-data", async ({ accessToken, data }: ILezioneFetch) => {
+  try {
+    const response = await fetch(url + "/lezioni/after/" + data, {
+      method: "GET",
+      headers: { Authorization: "Bearer " + accessToken, "Content-Type": "Application/Json" },
+    });
+    if (response.ok) {
+      const data: ILezione[] = await response.json();
+      return data;
+    } else {
+      console.log("errore");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const lezioniSlice = createSlice({
   name: "lezioni",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(lezioniFetchData.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(lezioniFetchData.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.lezioni = action.payload as ILezione[];
+      })
+      .addCase(lezioniFetchData.rejected, (state) => {
+        state.status = "failed";
+      })
       .addCase(lezioniFetch.pending, (state) => {
         state.status = "loading";
       })

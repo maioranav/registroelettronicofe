@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { CustomNav } from "../CustomNav/CustomNav";
+import { DashMsgs } from "../Dashboard/DashMsgs/DashMsgs";
+import { DashCalendar } from "../Dashboard/DashCalendar/DashCalendar";
 export const Segreteria = () => {
   const myProfile = useAppSelector((state) => state.myProfile);
   const loginToken = useAppSelector((state) => state.profile);
@@ -18,7 +20,26 @@ export const Segreteria = () => {
     <Row>
       <CustomNav />
       <Col xs={12} md={9} lg={10}>
-        <Container className="px-4">Contenuto della dash di segreteria</Container>
+        <Container className="px-4">
+          <Row>
+            <Col xs={12} className="greets mt-4">
+              DashBoard Segreteria
+            </Col>
+          </Row>
+          <Row className="my-3">
+            <Col xs={12}>
+              <DashCalendar />
+            </Col>
+          </Row>
+          <Row className="my-3">
+            <Col xs={12} md={6}>
+              Grafico Presenze
+            </Col>
+            <Col xs={12} md={6}>
+              <DashMsgs variante={"null"} />
+            </Col>
+          </Row>
+        </Container>
       </Col>
     </Row>
   );
