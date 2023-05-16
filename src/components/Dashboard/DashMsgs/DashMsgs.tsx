@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { messagesFetch } from "../../../app/reducers/messageSlice";
 import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface IDashProps {
   variante: string;
@@ -39,7 +39,9 @@ export const DashMsgs = ({ variante }: IDashProps) => {
         <span className="text-primary">
           {variante === "studente" && <HiBellAlert />}
           {variante === "docente" && <BsPlusCircleFill />}
-          <IoIosArrowForward />
+          <Link to="/messaggi">
+            <IoIosArrowForward />
+          </Link>
         </span>
       </h5>
       <ul>

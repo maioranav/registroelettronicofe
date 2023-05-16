@@ -4,7 +4,7 @@ import "./DashCalendar.scss";
 import { IoIosArrowForward } from "react-icons/io";
 import { lezioniFetch, lezioniFetchData } from "../../../app/reducers/lezioniSlice";
 import { format } from "date-fns";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 export const DashCalendar = () => {
   const corsi = useAppSelector((state) => state.myProfile?.myProfile?.corsi);
   const loginToken = useAppSelector((state) => state.profile?.token);
@@ -47,7 +47,9 @@ export const DashCalendar = () => {
             ))}
       </div>
       <h6 className="text-primary mt-2">
-        Vedi tutte le lezioni <IoIosArrowForward />
+        <Link to="/lezioni">
+          Vedi tutte le lezioni <IoIosArrowForward />
+        </Link>
       </h6>
     </div>
   );
