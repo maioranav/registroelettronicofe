@@ -82,7 +82,7 @@ export const CustomNav = () => {
           </Link>
         </div>
       </Col>
-      <div className="fixed-bottom d-flex d-md-none justify-content-evenly mb-3 navBarDown">
+      <div className="fixed-bottom d-flex d-md-none justify-content-evenly py-3 navBarDown">
         <Link to={homeLink}>
           <img
             src="./icons/navbar/home.svg"
