@@ -2,13 +2,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import { DashCalendar } from "../Dashboard/DashCalendar/DashCalendar";
 import { PresenzeChart } from "../PresenzeChart/PresenzeChart";
 import { DashMsgs } from "../Dashboard/DashMsgs/DashMsgs";
+import "./DashSegreteria.scss";
 
 export const DashSegreteria = () => {
   return (
     <Col xs={12} md={9} lg={10}>
       <Container className="px-4">
         <Row>
-          <Col xs={12} className="greets mt-4">
+          <Col xs={12} className="welcome mt-4">
             DashBoard Segreteria
           </Col>
         </Row>

@@ -26,7 +26,7 @@ export const Segreteria = () => {
       {pathname === "/corsi" && <Corsi />}
       {pathname === "/docenti" && <Docenti />}
       {pathname === "/studenti" && <Studenti />}
-      <DashSegreteria />
+      {pathname === "/segreteria" && <DashSegreteria />}
     </Row>
   );
 };

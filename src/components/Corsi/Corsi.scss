@@ -1,0 +1,49 @@
+.listPageTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+.listContainer {
+  width: 75%;
+  margin: 0 auto;
+  border: 1px solid #b9bcd7;
+  border-radius: 10px;
+  padding: 25px;
+  li {
+    border-bottom: 1px solid #b9bcd7;
+  }
+  .listData {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
+  .listTitle {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .listIcone {
+    img {
+      height: 18px;
+      margin-left: 18px;
+      opacity: 0.65;
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+      }
+    }
+  }
+  .listButtonNew {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    img {
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
+}
