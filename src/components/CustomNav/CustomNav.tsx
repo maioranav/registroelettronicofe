@@ -46,18 +46,22 @@ export const CustomNav = () => {
             <img src="./icons/navbar/home.svg" alt="" height={"16px"} width={"16px"} />
             Home
           </Link>
-          <Link to="/corsi" className={location.pathname === "/corsi" ? "sideBarLink active" : "sideBarLink"}>
-            <img src="./icons/navbar/corsi.svg" alt="" height={"16px"} width={"16px"} />
-            Corsi
-          </Link>
-          <Link to="/docenti" className={location.pathname === "/docenti" ? "sideBarLink active" : "sideBarLink"}>
-            <img src="./icons/navbar/docenti.svg" alt="" height={"16px"} width={"16px"} />
-            Docenti
-          </Link>
-          <Link to="/studenti" className={location.pathname === "/studenti" ? "sideBarLink active" : "sideBarLink"}>
-            <img src="./icons/navbar/profile.svg" alt="" height={"16px"} width={"16px"} />
-            Studenti
-          </Link>
+          {loginToken.token?.userType !== "Studente" && loginToken.token?.userType !== "Docente" && (
+            <>
+              <Link to="/corsi" className={location.pathname === "/corsi" ? "sideBarLink active" : "sideBarLink"}>
+                <img src="./icons/navbar/corsi.svg" alt="" height={"16px"} width={"16px"} />
+                Corsi
+              </Link>
+              <Link to="/docenti" className={location.pathname === "/docenti" ? "sideBarLink active" : "sideBarLink"}>
+                <img src="./icons/navbar/docenti.svg" alt="" height={"16px"} width={"16px"} />
+                Docenti
+              </Link>
+              <Link to="/studenti" className={location.pathname === "/studenti" ? "sideBarLink active" : "sideBarLink"}>
+                <img src="./icons/navbar/profile.svg" alt="" height={"16px"} width={"16px"} />
+                Studenti
+              </Link>
+            </>
+          )}
           <Link to="/messaggi" className={location.pathname === "/messaggi" ? "sideBarLink active" : "sideBarLink"}>
             <img src="./icons/navbar/chat.svg" alt="" height={"16px"} width={"16px"} />
             Messaggi

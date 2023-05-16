@@ -6,6 +6,7 @@ import { useAppSelector } from "../../app/hooks";
 import { CustomNav } from "../CustomNav/CustomNav";
 import { DashMsgs } from "../Dashboard/DashMsgs/DashMsgs";
 import { DashCalendar } from "../Dashboard/DashCalendar/DashCalendar";
+import { PresenzeChart } from "../PresenzeChart/PresenzeChart";
 export const Segreteria = () => {
   const myProfile = useAppSelector((state) => state.myProfile);
   const loginToken = useAppSelector((state) => state.profile);
@@ -32,8 +33,8 @@ export const Segreteria = () => {
             </Col>
           </Row>
           <Row className="my-3">
-            <Col xs={12} md={6}>
-              Grafico Presenze
+            <Col xs={12} md={6} className="mb-5">
+              <PresenzeChart />
             </Col>
             <Col xs={12} md={6}>
               <DashMsgs variante={"null"} />
