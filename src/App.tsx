@@ -8,6 +8,9 @@ import { NotFound } from "./components/NotFound/NotFound";
 import { HomePage } from "./components/HomePage/HomePage";
 import { Segreteria } from "./components/Segreteria/Segreteria";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+import { Messaggi } from "./components/Messaggi/Messaggi";
+import { Lezioni } from "./components/Lezioni/Lezioni";
+import { EditProfilo } from "./components/EditProfilo/EditProfilo";
 
 function App() {
   return (
@@ -17,6 +20,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/segreteria" element={<Segreteria />} />
+          <Route path="/messaggi" element={<Messaggi />} />
+          <Route path="/lezioni" element={<Lezioni />} />
+          <Route path="/corsi" element={<Segreteria />} />
+          <Route path="/docenti" element={<Segreteria />} />
+          <Route path="/studenti" element={<Segreteria />} />
+          <Route path="/profilo" element={<EditProfilo />} />
           <Route path="/dashstudente" element={<Dashboard variante="studente" />} />
           <Route path="/dashdocente" element={<Dashboard variante="docente" />} />
           <Route path="/contattaci" element={<Contattaci />} />

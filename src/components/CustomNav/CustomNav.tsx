@@ -92,8 +92,8 @@ export const CustomNav = () => {
             }
           />
         </Link>
-        <Link to="/calendario">
-          <img src="./icons/navbar/calendar.svg" alt="Calendario" className={location.pathname === "/calendario" ? "active" : ""} />
+        <Link to="/lezioni">
+          <img src="./icons/navbar/calendar.svg" alt="Calendario" className={location.pathname === "/lezioni" ? "active" : ""} />
         </Link>
         <Link to="/messaggi">
           <img src="./icons/navbar/chat.svg" alt="Messaggi" className={location.pathname === "/messaggi" ? "active" : ""} />
