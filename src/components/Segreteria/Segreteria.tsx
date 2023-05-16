@@ -33,12 +33,12 @@ export const Segreteria = () => {
             </Col>
           </Row>
           <Row className="my-3">
-            <Col xs={12} md={6} className="mb-5">
+            <Col xs={12} lg={6} className="mb-5 d-none d-lg-block">
               <div style={{ marginLeft: "-30px" }}>
                 <PresenzeChart />
               </div>
             </Col>
-            <Col xs={12} md={6}>
+            <Col xs={12} lg={6}>
               <DashMsgs variante={"null"} />
             </Col>
           </Row>

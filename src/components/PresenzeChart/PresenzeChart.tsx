@@ -14,7 +14,7 @@ export const PresenzeChart = () => {
 
   const gestioneChart = () => {
     const array = [] as DataGraph[];
-    lezioni.lezioni.forEach((el) => {
+    lezioni.lezioni?.forEach((el) => {
       array.push({
         name: (el.data + "").substring(el.data.toString().lastIndexOf("-") + 1),
         Presenze: el.presenze.length,

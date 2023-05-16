@@ -5,7 +5,7 @@ import { DashCalendar } from "./DashCalendar/DashCalendar";
 import { DashMsgs } from "./DashMsgs/DashMsgs";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CustomNav } from "../CustomNav/CustomNav";
 import { PresenzeChart } from "../PresenzeChart/PresenzeChart";
 
@@ -33,10 +33,10 @@ export const Dashboard = ({ variante }: IDashProps) => {
             <DashCalendar />
             {variante === "docente" ? (
               <Row>
-                <Col xs={12} md={6}>
+                <Col xs={12} lg={6} className="d-none d-lg-block">
                   <PresenzeChart />
                 </Col>
-                <Col xs={12} md={6}>
+                <Col xs={12} lg={6}>
                   <DashMsgs variante={variante} />
                 </Col>
               </Row>
