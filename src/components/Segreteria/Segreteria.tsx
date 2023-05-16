@@ -34,7 +34,9 @@ export const Segreteria = () => {
           </Row>
           <Row className="my-3">
             <Col xs={12} md={6} className="mb-5">
-              <PresenzeChart />
+              <div style={{ marginLeft: "-30px" }}>
+                <PresenzeChart />
+              </div>
             </Col>
             <Col xs={12} md={6}>
               <DashMsgs variante={"null"} />
