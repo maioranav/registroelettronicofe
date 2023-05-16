@@ -9,6 +9,7 @@ export const CustomNav = () => {
   const location = useLocation();
   const loginToken = useAppSelector((state) => state.profile);
   const [homeLink, setHomeLink] = useState("/dashboard");
+  const [page, setPage] = useState("home");
 
   useEffect(() => {
     if (loginToken.token?.userType === "Studente") {
@@ -26,38 +27,38 @@ export const CustomNav = () => {
           UniVincenzo.it
         </div>
         <div className="d-flex flex-column">
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          <li onClick={() => setPage("home")} className={page === "home" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/home.svg" alt="" height={"16px"} width={"16px"} />
             Home
-          </Link>
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          </li>
+          <li onClick={() => setPage("corsi")} className={page === "corsi" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/corsi.svg" alt="" height={"16px"} width={"16px"} />
             Corsi
-          </Link>
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          </li>
+          <li onClick={() => setPage("docenti")} className={page === "docenti" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/docenti.svg" alt="" height={"16px"} width={"16px"} />
             Docenti
-          </Link>
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          </li>
+          <li onClick={() => setPage("studenti")} className={page === "studenti" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/profile.svg" alt="" height={"16px"} width={"16px"} />
             Studenti
-          </Link>
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          </li>
+          <li onClick={() => setPage("messaggi")} className={page === "messaggi" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/chat.svg" alt="" height={"16px"} width={"16px"} />
             Messaggi
-          </Link>
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          </li>
+          <li onClick={() => setPage("lezioni")} className={page === "lezioni" ? "sideBarLink active" : "sideBarLink"}>
+            <img src="./icons/navbar/calendar.svg" alt="" height={"16px"} width={"16px"} />
             Lezioni
-          </Link>
+          </li>
         </div>
         <div className="d-flex flex-column">
-          <Link to="/" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+          <li className="sideBarLink">
+            <img src="./icons/navbar/settings.svg" alt="" height={"16px"} width={"16px"} />
             Impostazioni
-          </Link>
+          </li>
           <Link to="/logout" className="sideBarLink">
-            <img src="./icons/navbar/home.svg" alt="" height={"16px"} />
+            <img src="./icons/navbar/logout.svg" alt="" height={"16px"} width={"16px"} />
             Logout
           </Link>
         </div>

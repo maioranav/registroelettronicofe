@@ -21,19 +21,28 @@
   height: 100vh;
   box-shadow: 0px 4px 18px rgba(114, 128, 255, 0.25);
   .sideBarLink {
+    cursor: pointer;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     text-decoration: none !important;
     color: black;
     &:hover {
-      color: #9da7ff;
+      color: #8a8fc0;
+      > img {
+        filter: saturate(60%);
+      }
     }
     &.active {
       color: #7280ff;
+      font-weight: 500;
+      > img {
+        filter: saturate(100%);
+      }
     }
     > img {
       margin-right: 10px;
+      filter: saturate(0%);
     }
   }
 }
