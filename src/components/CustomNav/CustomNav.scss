@@ -20,6 +20,22 @@
   }
   height: 100vh;
   box-shadow: 0px 4px 18px rgba(114, 128, 255, 0.25);
+  .navBarProfile {
+    width: 120px;
+    height: 28px;
+    font-size: 12px;
+    background-color: #7280ff;
+    border-radius: 30px;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    > img {
+      margin: 0 6px;
+      height: 80%;
+    }
+    margin-bottom: 20px;
+  }
   .sideBarLink {
     cursor: pointer;
     display: flex;
