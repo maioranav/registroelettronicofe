@@ -7,6 +7,7 @@ import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CustomNav } from "../CustomNav/CustomNav";
+import { PresenzeChart } from "../PresenzeChart/PresenzeChart";
 
 interface IDashProps {
   variante: string;
@@ -30,7 +31,18 @@ export const Dashboard = ({ variante }: IDashProps) => {
           <Container className="px-4">
             <Profile variante={variante} />
             <DashCalendar />
-            <DashMsgs variante={variante} />
+            {variante === "docente" ? (
+              <Row>
+                <Col xs={12} md={6}>
+                  <PresenzeChart />
+                </Col>
+                <Col xs={12} md={6}>
+                  <DashMsgs variante={variante} />
+                </Col>
+              </Row>
+            ) : (
+              <DashMsgs variante={variante} />
+            )}
           </Container>
         </Col>
       </Row>
