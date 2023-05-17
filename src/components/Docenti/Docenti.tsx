@@ -1,4 +1,4 @@
-import { Button, Col, Container, Pagination, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Pagination, Row, Spinner } from "react-bootstrap";
 import "./Docenti.scss";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
@@ -46,6 +46,8 @@ export const Docenti = () => {
         <Row>
           <div className="listContainer">
             <ul className="p-0">
+              {docenti.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
+              {docenti.status === "loading" && <Spinner variant={"primary"} />}
               {docenti.docenti?.content?.length > 0 &&
                 docenti.docenti.content.map((el) => (
                   <li key={el.id} className="d-flex justify-content-between py-2 my-2 align-items-center">

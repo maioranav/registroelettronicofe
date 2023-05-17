@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 import "./Lezioni.scss";
 import { CustomNav } from "../CustomNav/CustomNav";
 import { useState, useEffect } from "react";
@@ -49,6 +49,8 @@ export const Lezioni = () => {
                 </div>
               </div>
               <ul>
+                {lezioni.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
+                {lezioni.status === "loading" && <Spinner variant={"primary"} />}
                 {lezioni.status !== "failed" &&
                   lezioni.lezioni?.length > 0 &&
                   lezioni.lezioni.map((el) => (

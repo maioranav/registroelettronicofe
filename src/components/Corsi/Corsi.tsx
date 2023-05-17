@@ -1,4 +1,4 @@
-import { Button, Col, Container, Pagination, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Pagination, Row, Spinner } from "react-bootstrap";
 import "./Corsi.scss";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -46,6 +46,8 @@ export const Corsi = () => {
         <Row>
           <div className="listContainer">
             <ul className="p-0">
+              {corsi.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
+              {corsi.status === "loading" && <Spinner variant={"primary"} />}
               {corsi.corsi?.content?.length > 0 &&
                 corsi.corsi.content.map((el) => (
                   <li key={el.id} className="d-flex justify-content-between py-2 my-2 align-items-center">

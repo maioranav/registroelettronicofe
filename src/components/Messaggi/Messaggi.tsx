@@ -95,6 +95,8 @@ export const Messaggi = () => {
             <Row>
               <div className="listContainer">
                 <ul className="p-0">
+                  {msgs.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
+                  {msgs.status === "loading" && <Spinner variant={"primary"} />}
                   {msgs.messages?.content?.length > 0 &&
                     msgs.messages?.content.map((el) => (
                       <li key={el.id} className="d-flex justify-content-between py-2 my-2 align-items-center">
