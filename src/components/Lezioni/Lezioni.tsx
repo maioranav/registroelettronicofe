@@ -13,6 +13,7 @@ export const Lezioni = () => {
   const [valueCal, onChangeCal] = useState(new Date());
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile?.token);
+  const myProfile = useAppSelector((state) => state.myProfile);
   const lezioni = useAppSelector((state) => state.lezioni);
 
   const handleChangeDate = (e: any) => {
@@ -20,7 +21,12 @@ export const Lezioni = () => {
   };
 
   useEffect(() => {
-    dispatch(lezioniFetchDataEsatta({ accessToken: loginToken.accessToken, data: format(valueCal, "yyyy-MM-dd") }));
+    dispatch(
+      lezioniFetchDataEsatta({
+        accessToken: loginToken.accessToken,
+        data: format(valueCal, "yyyy-MM-dd"),
+      })
+    );
   }, [valueCal]);
 
   return (
@@ -37,7 +43,7 @@ export const Lezioni = () => {
             <Col xs={12} md={6} lg={3} className="d-flex justify-content-center mb-4">
               <Calendar onChange={handleChangeDate} value={valueCal} />
             </Col>
-            <Col xs={12} md={6} lg={8} className="elencoLezioni offset-lg-1">
+            <Col xs={12} md={6} lg={8} className="elencoLezioni offset-xl-1">
               <div className="titoloGiornoSelezionato mb-3">
                 <div>
                   <p>{valueCal.getDate()}</p>
