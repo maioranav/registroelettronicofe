@@ -35,10 +35,12 @@ export const lezioniFetch = createAsyncThunk("fetch-lezioni", async ({ accessTok
       const data: ILezione[] = await response.json();
       return data;
     } else {
-      console.log("errore");
+      let res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
     }
   } catch (error) {
-    console.log(error);
+    return Promise.reject(error);
   }
 });
 
@@ -52,10 +54,12 @@ export const lezioniFetchData = createAsyncThunk("fetch-lezioni-data", async ({ 
       const data: ILezione[] = await response.json();
       return data;
     } else {
-      console.log("errore");
+      let res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
     }
   } catch (error) {
-    console.log(error);
+    return Promise.reject(error);
   }
 });
 
@@ -69,10 +73,12 @@ export const lezioniFetchDataEsatta = createAsyncThunk("fetch-lezioni-dataesatta
       const data: ILezione[] = await response.json();
       return data;
     } else {
-      console.log("errore");
+      let res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
     }
   } catch (error) {
-    console.log(error);
+    return Promise.reject(error);
   }
 });
 
