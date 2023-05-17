@@ -3,7 +3,7 @@ import "./Lezioni.scss";
 import { CustomNav } from "../CustomNav/CustomNav";
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import "./Calendar.scss";
 import { format } from "date-fns";
 import it from "date-fns/locale/it";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
