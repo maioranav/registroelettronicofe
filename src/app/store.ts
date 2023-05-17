@@ -8,6 +8,7 @@ import messageSlice from "./reducers/messageSlice";
 import lezioniSlice, { lezioniFetch } from "./reducers/lezioniSlice";
 import corsiSlice from "./reducers/corsiSlice";
 import docentiSlice from "./reducers/docentiSlice";
+import studentiSlice from "./reducers/studentiSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   lezioni: lezioniSlice,
   corsi: corsiSlice,
   docenti: docentiSlice,
+  studenti: studentiSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) as typeof rootReducer;
