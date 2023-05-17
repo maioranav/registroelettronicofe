@@ -59,6 +59,23 @@ export const lezioniFetchData = createAsyncThunk("fetch-lezioni-data", async ({ 
   }
 });
 
+export const lezioniFetchDataEsatta = createAsyncThunk("fetch-lezioni-dataesatta", async ({ accessToken, data }: ILezioneFetch) => {
+  try {
+    const response = await fetch(url + "/lezioni/data/" + data, {
+      method: "GET",
+      headers: { Authorization: "Bearer " + accessToken, "Content-Type": "Application/Json" },
+    });
+    if (response.ok) {
+      const data: ILezione[] = await response.json();
+      return data;
+    } else {
+      console.log("errore");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const lezioniSlice = createSlice({
   name: "lezioni",
   initialState,
@@ -83,6 +100,16 @@ const lezioniSlice = createSlice({
         state.lezioni = action.payload as ILezione[];
       })
       .addCase(lezioniFetch.rejected, (state) => {
+        state.status = "failed";
+      })
+      .addCase(lezioniFetchDataEsatta.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(lezioniFetchDataEsatta.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.lezioni = action.payload as ILezione[];
+      })
+      .addCase(lezioniFetchDataEsatta.rejected, (state) => {
         state.status = "failed";
       });
   },

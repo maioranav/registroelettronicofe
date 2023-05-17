@@ -63,7 +63,7 @@ export const Studenti = () => {
             </ul>
             <Button className="listButtonNew">
               <img src="../../../icons/plus.svg" alt="Aggiungi" />
-              Crea Docente
+              Crea Studente
             </Button>
             <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
               <Pagination>

@@ -1,0 +1,80 @@
+.greets {
+  font-weight: 500;
+  line-height: 29px;
+  font-size: 24px;
+}
+.elencoLezioni {
+  > .titoloGiornoSelezionato {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    > div:first-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      > p:first-child {
+        font: {
+          weight: 600;
+          size: 24px;
+        }
+        margin: 0;
+      }
+      > p:last-child {
+        font: {
+          weight: 400;
+          size: 10px;
+        }
+        margin: 0;
+      }
+    }
+    > div:last-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      > p:first-child {
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0;
+      }
+      > p:last-child {
+        color: #b9bcd7;
+        font-size: 10px;
+        font-weight: 400;
+        margin: 0;
+      }
+    }
+  }
+  > ul {
+    padding: 0;
+    li {
+      height: 82px;
+      border-radius: 13px;
+      width: fit-content;
+      min-width: 300px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      > p {
+        margin: 0;
+        &:first-child {
+          font-size: 10px;
+          font-weight: 400;
+        }
+        &:last-child {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+      &:nth-child(even) {
+        background-color: #fee1bc;
+      }
+      &:nth-child(odd) {
+        background-color: #d8e6f7;
+      }
+    }
+  }
+}
