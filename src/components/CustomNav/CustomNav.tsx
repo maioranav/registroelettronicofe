@@ -72,14 +72,12 @@ export const CustomNav = () => {
           </Link>
         </div>
         <div className="d-flex flex-column">
-          <Link to="/profilo" className="sideBarLink">
-            <img src="./icons/navbar/settings.svg" alt="" height={"16px"} width={"16px"} />
-            Impostazioni
-          </Link>
-          <Link to="/contattaci" className="sideBarLink">
-            <img src="./icons/navbar/settings.svg" alt="" height={"16px"} width={"16px"} />
-            Aiuto
-          </Link>
+          {(loginToken.token?.userType === "Studente" || loginToken.token?.userType === "Docente") && (
+            <Link to="/contattaci" className="sideBarLink">
+              <img src="./icons/navbar/settings.svg" alt="" height={"16px"} width={"16px"} />
+              Aiuto
+            </Link>
+          )}
           <Link to="/logout" className="sideBarLink">
             <img src="./icons/navbar/logout.svg" alt="" height={"16px"} width={"16px"} />
             Logout
