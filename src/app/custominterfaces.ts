@@ -30,7 +30,7 @@ export interface Sort {
 export interface Corso {
   id: number;
   name: string;
-  docente: Docente;
+  docente?: Docente;
 }
 
 export interface Docente {
