@@ -42,6 +42,11 @@ interface IDocenteFetch {
   sort?: string;
 }
 
+interface IDocenteDelete {
+  accessToken: string;
+  id: number;
+}
+
 export const docentiFetch = createAsyncThunk("fetch-docenti", async ({ accessToken, elNo = 4, page = 0, sort }: IDocenteFetch) => {
   let pageable = `?page=${page}&size=${elNo}`;
   if (sort !== null && sort !== undefined) {
@@ -54,6 +59,26 @@ export const docentiFetch = createAsyncThunk("fetch-docenti", async ({ accessTok
     });
     if (response.ok) {
       const data: PageableFetch<Docente[]> = await response.json();
+      return data;
+    } else {
+      const res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
+    }
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+});
+
+export const deleteDocente = createAsyncThunk("delete-docenti", async ({ accessToken, id }: IDocenteDelete) => {
+  try {
+    const response = await fetch(url + "/docenti/" + id, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    if (response.ok) {
+      const data: Docente = await response.json();
       return data;
     } else {
       const res = await response.json();
