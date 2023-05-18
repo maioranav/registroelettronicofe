@@ -42,6 +42,11 @@ interface ICorsoFetch {
   sort?: string;
 }
 
+interface ICorsoDelete {
+  accessToken: string;
+  id: number;
+}
+
 export const corsiFetch = createAsyncThunk("fetch-corsi", async ({ accessToken, elNo = 4, page = 0, sort }: ICorsoFetch) => {
   let pageable = `?page=${page}&size=${elNo}`;
   if (sort !== null && sort !== undefined) {
@@ -50,6 +55,26 @@ export const corsiFetch = createAsyncThunk("fetch-corsi", async ({ accessToken, 
   try {
     const response = await fetch(url + "/corsi" + pageable, {
       method: "GET",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    if (response.ok) {
+      const data: PageableFetch<Corso[]> = await response.json();
+      return data;
+    } else {
+      const res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
+    }
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+});
+
+export const deleteCorso = createAsyncThunk("fetch-corsi", async ({ accessToken, id }: ICorsoDelete) => {
+  try {
+    const response = await fetch(url + "/corsi/" + id, {
+      method: "DELETE",
       headers: { Authorization: "Bearer " + accessToken },
     });
     if (response.ok) {
