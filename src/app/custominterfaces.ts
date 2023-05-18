@@ -28,8 +28,9 @@ export interface Sort {
 }
 
 export interface Corso {
-  id: number;
+  id?: number;
   name: string;
+  plesso: Plesso;
   docente?: Docente;
 }
 
@@ -47,5 +48,11 @@ export interface Studente {
   surname: string;
   username: string;
   email: string;
+  corsi?: Corso[];
+}
+
+export interface Plesso {
+  id: number;
+  name?: string;
   corsi?: Corso[];
 }

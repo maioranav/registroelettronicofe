@@ -78,7 +78,6 @@ export const Corsi = () => {
                           handleShow();
                         }}
                       />
-                      <img src="../../../icons/listpresenze.svg" alt="Lista Studenti" />
                       <img
                         src="../../../icons/delete.svg"
                         alt="Elimina"
