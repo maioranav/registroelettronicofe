@@ -61,6 +61,16 @@
   display: none;
 }
 
+.react-calendar__navigation__prev-button,
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__label__labelText--from {
+  color: #7280ff;
+  &:hover {
+    filter: saturate(50%);
+    background-color: none;
+  }
+}
+
 .react-calendar__navigation button:disabled {
   background-color: #f0f0f0;
 }

@@ -34,7 +34,7 @@ export const Lezioni = () => {
       <CustomNav />
       <Col xs={12} md={9} lg={10}>
         <Container className="py-5">
-          <Row>
+          <Row className="d-none d-md-block">
             <Col xs={12} className="greets mb-4">
               Calendario Lezioni
             </Col>
@@ -43,7 +43,7 @@ export const Lezioni = () => {
             <Col xs={12} md={6} lg={3} className="d-flex justify-content-center mb-4">
               <Calendar onChange={handleChangeDate} value={valueCal} />
             </Col>
-            <Col xs={12} md={6} lg={8} className="elencoLezioni offset-xl-1">
+            <Col xs={12} md={6} lg={8} className="elencoLezioni offset-xl-1 px-4">
               <div className="titoloGiornoSelezionato mb-3">
                 <div>
                   <p>{valueCal.getDate()}</p>
