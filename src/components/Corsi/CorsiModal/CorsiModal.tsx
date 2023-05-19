@@ -77,7 +77,7 @@ export const CorsiModal = ({ show, handleClose, id }: CorsiModalProps) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             {id === null && <Modal.Title>Crea nuovo corso</Modal.Title>}
             {id !== null && <Modal.Title>Modifica Corso</Modal.Title>}
           </Modal.Header>

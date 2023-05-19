@@ -57,7 +57,6 @@ export const Studenti = () => {
                     </div>
                     <div className="listIcone">
                       <img src="../../../icons/modifica.svg" alt="Modifica" />
-                      <img src="../../../icons/listpresenze.svg" alt="Lista Presenze" />
                       <img src="../../../icons/delete.svg" alt="Elimina" />
                     </div>
                   </li>

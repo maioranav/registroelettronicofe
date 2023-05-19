@@ -14,7 +14,13 @@ export const Corsi = () => {
   const [show, setShow] = useState(false);
   const [eliminaCorso, setEliminaCorso] = useState({ id: null as any, name: "" });
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setIdModale(null);
+    setTimeout(() => {
+      dispatch(corsiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page }));
+    }, 1000);
+  };
   const handleShow = () => setShow(true);
 
   useEffect(() => {
