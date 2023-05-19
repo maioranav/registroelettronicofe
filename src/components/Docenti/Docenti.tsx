@@ -10,6 +10,7 @@ export const Docenti = () => {
   const docenti = useAppSelector((state) => state.docenti);
   const [page, setPage] = useState(0);
   const [eliminaDocente, setEliminaDocente] = useState({ id: null as any, username: "" });
+  const [error, setError] = useState({ show: false, error: "" });
 
   useEffect(() => {
     dispatch(docentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
@@ -43,6 +44,13 @@ export const Docenti = () => {
     setEliminaDocente({ id: null as any, username: "" });
   };
 
+  const handleError = (error: string) => {
+    setError({ show: true, error });
+    setTimeout(() => {
+      setError({ show: false, error: "" });
+    }, 3000);
+  };
+
   return (
     <Col xs={12} md={9} lg={10}>
       <Container>
@@ -69,7 +77,11 @@ export const Docenti = () => {
                         src="../../../icons/delete.svg"
                         alt="Elimina"
                         onClick={() => {
-                          setEliminaDocente({ id: el.id, username: el.username });
+                          if (el.corsi && el.corsi?.length > 0) {
+                            handleError("Non puoi eliminare docenti che hanno corsi attivi");
+                          } else {
+                            setEliminaDocente({ id: el.id, username: el.username });
+                          }
                         }}
                       />
                     </div>
@@ -91,6 +103,11 @@ export const Docenti = () => {
                     setEliminaDocente({ id: null, username: "" });
                   }}
                 />
+              </Alert>
+            )}
+            {error.show && (
+              <Alert variant="danger" className="my-3">
+                {error.error}
               </Alert>
             )}
             <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
