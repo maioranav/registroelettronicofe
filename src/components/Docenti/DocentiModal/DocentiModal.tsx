@@ -120,28 +120,38 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
             {id !== null && <Modal.Title>Modifica Docente</Modal.Title>}
           </Modal.Header>
           <Modal.Body>
-            <div>
+            <div className="formModalComponent">
               <label htmlFor="name">Nome: </label>
               <input type="text" id="name" value={docente.docente.name} onChange={handleName} />
             </div>
-            <div>
+            <div className="formModalComponent">
               <label htmlFor="surname">Cognome: </label>
               <input type="text" id="surname" value={docente.docente.surname} onChange={handleSurname} />
             </div>
-            <div>
+            <div className="formModalComponent">
               <label htmlFor="email">Email: </label>
               <input type="email" id="email" value={docente.docente.email} onChange={handleEmail} />
             </div>
-            <div>
+            <div className="formModalComponent">
               <label htmlFor="username">Username: </label>
               <input type="text" id="username" value={docente.docente.username} onChange={handleUserName} />
             </div>
-            <div>
+            <div className="formModalComponent">
               <label htmlFor="password">Password: </label>
               <input type="password" id="password" value={docente.docente.password} onChange={handlePassword} />
             </div>
-            <div>
-              <label>Elencocorsi </label>
+            <div className="corsiModalComponent">
+              <label>Corsi da Assegnare:</label>
+              <div>
+                <ul>
+                  {allCorsi.corsi?.map((c) => (
+                    <li key={c.id}>
+                      <input type="checkbox" />
+                      <p>{c.name}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
