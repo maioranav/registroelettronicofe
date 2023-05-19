@@ -35,21 +35,23 @@ export interface Corso {
 }
 
 export interface Docente {
-  id: number;
+  id?: number;
   name: string;
   surname: string;
   username: string;
   email: string;
   corsi?: Corso[];
+  password?: string;
 }
 
 export interface Studente {
-  id: number;
+  id?: number;
   name: string;
   surname: string;
   username: string;
   email: string;
   corsi?: Corso[];
+  password?: string;
 }
 
 export interface Plesso {

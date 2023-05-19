@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
 import { FcOk } from "react-icons/fc";
 import { deleteDocente, docentiFetch } from "../../app/reducers/docentiSlice";
+import { DocentiModal } from "./DocentiModal/DocentiModal";
 export const Docenti = () => {
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile?.token);
@@ -11,6 +12,17 @@ export const Docenti = () => {
   const [page, setPage] = useState(0);
   const [eliminaDocente, setEliminaDocente] = useState({ id: null as any, username: "" });
   const [error, setError] = useState({ show: false, error: "" });
+  const [show, setShow] = useState(false);
+  const [idModale, setIdModale] = useState<number | undefined | null>();
+
+  const handleClose = () => {
+    setShow(false);
+    setTimeout(() => {
+      setIdModale(null);
+      dispatch(docentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
+    }, 1000);
+  };
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(docentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
@@ -72,7 +84,14 @@ export const Docenti = () => {
                       <p className="listTitle">{el.name + " " + el.surname}</p>
                     </div>
                     <div className="listIcone">
-                      <img src="../../../icons/modifica.svg" alt="Modifica" />
+                      <img
+                        src="../../../icons/modifica.svg"
+                        alt="Modifica"
+                        onClick={() => {
+                          setIdModale(el.id);
+                          handleShow();
+                        }}
+                      />
                       <img
                         src="../../../icons/delete.svg"
                         alt="Elimina"
@@ -88,7 +107,7 @@ export const Docenti = () => {
                   </li>
                 ))}
             </ul>
-            <Button className="listButtonNew">
+            <Button className="listButtonNew" onClick={handleShow}>
               <img src="../../../icons/plus.svg" alt="Aggiungi" />
               Crea Docente
             </Button>
@@ -110,6 +129,7 @@ export const Docenti = () => {
                 {error.error}
               </Alert>
             )}
+            <DocentiModal show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
             <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
               <Pagination>
                 <Pagination.First

@@ -73,7 +73,7 @@ export const corsiFetch = createAsyncThunk("fetch-corsi", async ({ accessToken, 
 
 export const deleteCorso = createAsyncThunk("fetch-corsi", async ({ accessToken, id }: ICorsoDelete) => {
   try {
-    const response = await fetch(url + "/corsi/" + id, {
+    const response = await fetch(url + "/corsi/id/" + id, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + accessToken },
     });

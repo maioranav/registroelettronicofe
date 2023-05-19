@@ -26,7 +26,7 @@ export const CorsiModal = ({ show, handleClose, id }: CorsiModalProps) => {
     try {
       let response;
       if (method === "GET") {
-        response = await fetch(process.env.REACT_APP_APIURL + "/corsi/" + id, {
+        response = await fetch(process.env.REACT_APP_APIURL + "/corsi/id/" + id, {
           method,
           headers: { Authorization: "Bearer " + loginToken.token?.accessToken },
         });

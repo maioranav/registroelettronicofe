@@ -10,9 +10,9 @@ export const Corsi = () => {
   const loginToken = useAppSelector((state) => state.profile?.token);
   const corsi = useAppSelector((state) => state.corsi);
   const [page, setPage] = useState(0);
-  const [idModale, setIdModale] = useState(null) as any;
-  const [show, setShow] = useState(false);
   const [eliminaCorso, setEliminaCorso] = useState({ id: null as any, name: "" });
+  const [show, setShow] = useState(false);
+  const [idModale, setIdModale] = useState(null) as any;
 
   const handleClose = () => {
     setShow(false);
