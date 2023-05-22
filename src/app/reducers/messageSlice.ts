@@ -53,6 +53,11 @@ interface IMessageFetch {
   corsi?: Corso[];
 }
 
+interface IMessageDelete {
+  accessToken: string;
+  id: number;
+}
+
 export const messagesFetch = createAsyncThunk("fetch-messages", async ({ accessToken, elNo = 4, page = 0, sort }: IMessageFetch) => {
   let pageable = `?page=${page}&size=${elNo}`;
   if (sort !== null && sort !== undefined) {
@@ -65,6 +70,26 @@ export const messagesFetch = createAsyncThunk("fetch-messages", async ({ accessT
     });
     if (response.ok) {
       const data: PageableFetch<IMessage[]> = await response.json();
+      return data;
+    } else {
+      const res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
+    }
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+});
+
+export const deleteMessaggio = createAsyncThunk("fetch-messaggio-delete", async ({ accessToken, id }: IMessageDelete) => {
+  try {
+    const response = await fetch(url + "/msgs/id/" + id, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    if (response.ok) {
+      const data: IMessage = await response.json();
       return data;
     } else {
       const res = await response.json();

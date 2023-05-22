@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Pagination, Row, Spinner } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { messagesFetch } from "../../app/reducers/messageSlice";
+import { deleteMessaggio, messagesFetch } from "../../app/reducers/messageSlice";
+import { FcOk } from "react-icons/fc";
 
 export const Messaggi = () => {
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile?.token);
   const msgs = useAppSelector((state) => state.msgs);
   const [page, setPage] = useState(0);
+  const [eliminaMessaggio, setEliminaMessaggio] = useState({ id: null as any, name: "" });
   const myProfile = useAppSelector((state) => state.myProfile?.myProfile);
   const location = useLocation();
 
@@ -43,6 +45,12 @@ export const Messaggi = () => {
         setPage(page + 1);
       }
     }
+  };
+
+  const handleDelete = async () => {
+    await dispatch(deleteMessaggio({ accessToken: loginToken.accessToken, id: eliminaMessaggio.id }));
+    dispatch(messagesFetch({ accessToken: loginToken.accessToken, elNo: 5, sort: "data,desc" }));
+    setEliminaMessaggio({ id: null as any, name: "" });
   };
 
   return (
@@ -101,12 +109,18 @@ export const Messaggi = () => {
                     msgs.messages?.content.map((el) => (
                       <li key={el.id} className="d-flex justify-content-between py-2 my-2 align-items-center">
                         <div>
-                          <p className="listData">{`${el.data} - ${el.corso.name} - Prof. ${el.docente.name.charAt(0)} ${el.docente.surname}`}</p>
+                          <p className="listData">{`${el.data} - ${el.corso?.name} - Prof. ${el.docente.name.charAt(0)} ${el.docente.surname}`}</p>
                           <p className="listTitle">{el.msg.substring(0, 100)}</p>
                         </div>
                         <div className="listIcone d-flex">
                           <img src="../../../icons/modifica.svg" alt="Modifica" />
-                          <img src="../../../icons/delete.svg" alt="Elimina" />
+                          <img
+                            src="../../../icons/delete.svg"
+                            alt="Elimina"
+                            onClick={() => {
+                              setEliminaMessaggio({ id: el.id, name: el.id + "" });
+                            }}
+                          />
                         </div>
                       </li>
                     ))}
@@ -115,6 +129,19 @@ export const Messaggi = () => {
                   <img src="../../../icons/plus.svg" alt="Aggiungi" />
                   Crea Messaggio
                 </Button>
+                {eliminaMessaggio.id !== null && (
+                  <Alert variant={"warning"} className="my-3">
+                    Stai eliminando {eliminaMessaggio.name}. Sei sicuro?{" "}
+                    <FcOk style={{ marginLeft: 10, marginRight: 10, fontSize: 24 }} onClick={handleDelete} />
+                    <img
+                      src="../../../icons/delete.svg"
+                      alt="Elimina"
+                      onClick={() => {
+                        setEliminaMessaggio({ id: null, name: "" });
+                      }}
+                    />
+                  </Alert>
+                )}
                 <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
                   <Pagination>
                     <Pagination.First
