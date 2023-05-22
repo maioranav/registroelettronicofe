@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Corso, Docente } from "../../../app/custominterfaces";
 import { useAppSelector } from "../../../app/hooks";
 import "./DocentiModal.scss";
-import { Button, Modal } from "react-bootstrap";
+import { Alert, Button, Modal, Spinner } from "react-bootstrap";
 
 interface DocentiPropModal {
   show: boolean;
@@ -13,25 +13,7 @@ interface DocentiPropModal {
 
 export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropModal) => {
   const loginToken = useAppSelector((state) => state.profile?.token);
-  const [allCorsi, setAllCorsi] = useState({ corsi: [] as Corso[], status: "idle" });
-  const [docente, setDocente] = useState({ docente: { email: "", name: "", surname: "", username: "" } as Docente, status: "idle" });
-
-  const fetchAllCorsi = async () => {
-    try {
-      const response = await fetch(process.env.REACT_APP_APIURL + "/corsi/all", {
-        method: "GET",
-        headers: { Authorization: "Bearer " + loginToken.accessToken },
-      });
-      if (response.ok) {
-        const data: Corso[] = await response.json();
-        setAllCorsi({ corsi: data, status: "idle" });
-      } else {
-        setAllCorsi({ corsi: [], status: "failed" });
-      }
-    } catch (error) {
-      setAllCorsi({ corsi: [], status: "failed" });
-    }
-  };
+  const [docente, setDocente] = useState({ docente: { email: "", name: "", surname: "", username: "", corsi: [] } as Docente, status: "idle" });
 
   const fetchDocente = async () => {
     try {
@@ -46,7 +28,7 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
         setDocente({ docente: { email: "", name: "", surname: "", username: "" }, status: "failed" });
       }
     } catch (error) {
-      setAllCorsi({ corsi: [], status: "failed" });
+      setDocente({ docente: { email: "", name: "", surname: "", username: "" }, status: "failed" });
     }
   };
 
@@ -57,10 +39,7 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
         headers: { Authorization: "Bearer " + loginToken.accessToken, "Content-Type": "application/json" },
         body: JSON.stringify(bodyContent),
       });
-      if (response.ok) {
-        const data: Docente = await response.json();
-        // handleClose();
-      } else {
+      if (!response.ok) {
         console.log("Errore nella richiesta");
         setDocente({ ...docente, status: "failed" });
       }
@@ -71,7 +50,6 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
   };
 
   const initModal = async () => {
-    await fetchAllCorsi();
     if (id != null && id !== undefined) {
       await fetchDocente();
     } else {
@@ -120,39 +98,46 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
             {id !== null && <Modal.Title>Modifica Docente</Modal.Title>}
           </Modal.Header>
           <Modal.Body>
-            <div className="formModalComponent">
-              <label htmlFor="name">Nome: </label>
-              <input type="text" id="name" value={docente.docente.name} onChange={handleName} />
-            </div>
-            <div className="formModalComponent">
-              <label htmlFor="surname">Cognome: </label>
-              <input type="text" id="surname" value={docente.docente.surname} onChange={handleSurname} />
-            </div>
-            <div className="formModalComponent">
-              <label htmlFor="email">Email: </label>
-              <input type="email" id="email" value={docente.docente.email} onChange={handleEmail} />
-            </div>
-            <div className="formModalComponent">
-              <label htmlFor="username">Username: </label>
-              <input type="text" id="username" value={docente.docente.username} onChange={handleUserName} />
-            </div>
-            <div className="formModalComponent">
-              <label htmlFor="password">Password: </label>
-              <input type="password" id="password" value={docente.docente.password} onChange={handlePassword} />
-            </div>
-            <div className="corsiModalComponent">
-              <label>Corsi da Assegnare:</label>
-              <div>
-                <ul>
-                  {allCorsi.corsi?.map((c) => (
-                    <li key={c.id}>
-                      <input type="checkbox" />
-                      <p>{c.name}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            {docente.status === "loading" && <Spinner variant="primary" />}
+            {docente.status === "failed" && <Alert variant="danger">Qualcosa è andato storto!</Alert>}
+            {docente.status === "idle" && (
+              <>
+                <div className="formModalComponent">
+                  <label htmlFor="name">Nome: </label>
+                  <input type="text" id="name" value={docente.docente.name} onChange={handleName} />
+                </div>
+                <div className="formModalComponent">
+                  <label htmlFor="surname">Cognome: </label>
+                  <input type="text" id="surname" value={docente.docente.surname} onChange={handleSurname} />
+                </div>
+                <div className="formModalComponent">
+                  <label htmlFor="email">Email: </label>
+                  <input type="email" id="email" value={docente.docente.email} onChange={handleEmail} />
+                </div>
+                <div className="formModalComponent">
+                  <label htmlFor="username">Username: </label>
+                  <input type="text" id="username" value={docente.docente.username} onChange={handleUserName} />
+                </div>
+                <div className="formModalComponent">
+                  <label htmlFor="password">Password: </label>
+                  <input type="password" id="password" value={docente.docente.password} onChange={handlePassword} />
+                </div>
+                {docente.docente?.corsi && docente.docente?.corsi?.length > 0 && (
+                  <div className="corsiModalComponent">
+                    <label>Corsi Assegnati:</label>
+                    <div>
+                      <ul>
+                        {docente.docente?.corsi?.map((c) => (
+                          <li key={c.id}>
+                            <p>{c.name}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
