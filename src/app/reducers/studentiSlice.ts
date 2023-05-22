@@ -42,6 +42,11 @@ interface IStudenteFetch {
   sort?: string;
 }
 
+interface IStudenteDelete {
+  accessToken: string;
+  id: number;
+}
+
 export const studentiFetch = createAsyncThunk("fetch-studenti", async ({ accessToken, elNo = 4, page = 0, sort }: IStudenteFetch) => {
   let pageable = `?page=${page}&size=${elNo}`;
   if (sort !== null && sort !== undefined) {
@@ -54,6 +59,26 @@ export const studentiFetch = createAsyncThunk("fetch-studenti", async ({ accessT
     });
     if (response.ok) {
       const data: PageableFetch<Studente[]> = await response.json();
+      return data;
+    } else {
+      const res = await response.json();
+      console.log(res.message);
+      return Promise.reject(res.message);
+    }
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+});
+
+export const deleteStudente = createAsyncThunk("fetch-studente-delete", async ({ accessToken, id }: IStudenteDelete) => {
+  try {
+    const response = await fetch(url + "/studenti/id/" + id, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    if (response.ok) {
+      const data: Studente = await response.json();
       return data;
     } else {
       const res = await response.json();

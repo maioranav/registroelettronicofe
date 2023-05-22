@@ -2,12 +2,15 @@ import { Alert, Button, Col, Container, Pagination, Row, Spinner } from "react-b
 import "./Studenti.scss";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
-import { studentiFetch } from "../../app/reducers/studentiSlice";
+import { deleteStudente, studentiFetch } from "../../app/reducers/studentiSlice";
+import { FcOk } from "react-icons/fc";
+
 export const Studenti = () => {
   const dispatch = useAppDispatch();
   const loginToken = useAppSelector((state) => state.profile?.token);
   const studenti = useAppSelector((state) => state.studenti);
   const [page, setPage] = useState(0);
+  const [eliminaStudente, setEliminaStudente] = useState({ id: null as any, name: "" });
 
   useEffect(() => {
     dispatch(studentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
@@ -35,6 +38,12 @@ export const Studenti = () => {
     }
   };
 
+  const handleDelete = async () => {
+    await dispatch(deleteStudente({ accessToken: loginToken.accessToken, id: eliminaStudente.id }));
+    dispatch(studentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
+    setEliminaStudente({ id: null as any, name: "" });
+  };
+
   return (
     <Col xs={12} md={9} lg={10}>
       <Container>
@@ -57,7 +66,13 @@ export const Studenti = () => {
                     </div>
                     <div className="listIcone">
                       <img src="../../../icons/modifica.svg" alt="Modifica" />
-                      <img src="../../../icons/delete.svg" alt="Elimina" />
+                      <img
+                        src="../../../icons/delete.svg"
+                        alt="Elimina"
+                        onClick={() => {
+                          setEliminaStudente({ id: el.id, name: el.username });
+                        }}
+                      />
                     </div>
                   </li>
                 ))}
@@ -66,6 +81,19 @@ export const Studenti = () => {
               <img src="../../../icons/plus.svg" alt="Aggiungi" />
               Crea Studente
             </Button>
+            {eliminaStudente.id !== null && (
+              <Alert variant={"warning"} className="my-3">
+                Stai eliminando {eliminaStudente.name}. Sei sicuro?{" "}
+                <FcOk style={{ marginLeft: 10, marginRight: 10, fontSize: 24 }} onClick={handleDelete} />
+                <img
+                  src="../../../icons/delete.svg"
+                  alt="Elimina"
+                  onClick={() => {
+                    setEliminaStudente({ id: null, name: "" });
+                  }}
+                />
+              </Alert>
+            )}
             <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
               <Pagination>
                 <Pagination.First
