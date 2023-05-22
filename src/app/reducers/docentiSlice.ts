@@ -73,7 +73,7 @@ export const docentiFetch = createAsyncThunk("fetch-docenti", async ({ accessTok
 
 export const deleteDocente = createAsyncThunk("delete-docenti", async ({ accessToken, id }: IDocenteDelete) => {
   try {
-    const response = await fetch(url + "/docenti/" + id, {
+    const response = await fetch(url + "/docenti/id/" + id, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + accessToken },
     });

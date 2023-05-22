@@ -17,7 +17,7 @@ export const DocentiModal = ({ id, show, handleClose, handleShow }: DocentiPropM
 
   const fetchDocente = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_APIURL + "/docenti/" + id, {
+      const response = await fetch(process.env.REACT_APP_APIURL + "/docenti/id/" + id, {
         method: "GET",
         headers: { Authorization: "Bearer " + loginToken.accessToken },
       });
