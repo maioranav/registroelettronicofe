@@ -1,0 +1,22 @@
+.formModalComponent {
+  > label {
+    width: 25%;
+    margin-bottom: 15px;
+  }
+}
+.corsiModalComponent {
+  label {
+    margin-bottom: 10px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    > p {
+      margin: 0;
+    }
+    > input {
+      margin-right: 15px;
+    }
+  }
+}

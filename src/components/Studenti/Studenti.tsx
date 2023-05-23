@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
 import { deleteStudente, studentiFetch } from "../../app/reducers/studentiSlice";
 import { FcOk } from "react-icons/fc";
+import { StudentiModal } from "./StudentiModal/StudentiModal";
 
 export const Studenti = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,17 @@ export const Studenti = () => {
   const studenti = useAppSelector((state) => state.studenti);
   const [page, setPage] = useState(0);
   const [eliminaStudente, setEliminaStudente] = useState({ id: null as any, name: "" });
+  const [show, setShow] = useState(false);
+  const [idModale, setIdModale] = useState<number | undefined | null>();
+
+  const handleClose = () => {
+    setShow(false);
+    setTimeout(() => {
+      setIdModale(null);
+      dispatch(studentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
+    }, 1000);
+  };
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(studentiFetch({ accessToken: loginToken.accessToken, elNo: 5, page: page, sort: "surname" }));
@@ -65,7 +77,14 @@ export const Studenti = () => {
                       <p className="listTitle">{el.name + " " + el.surname}</p>
                     </div>
                     <div className="listIcone">
-                      <img src="../../../icons/modifica.svg" alt="Modifica" />
+                      <img
+                        src="../../../icons/modifica.svg"
+                        alt="Modifica"
+                        onClick={() => {
+                          setIdModale(el.id);
+                          handleShow();
+                        }}
+                      />
                       <img
                         src="../../../icons/delete.svg"
                         alt="Elimina"
@@ -77,7 +96,7 @@ export const Studenti = () => {
                   </li>
                 ))}
             </ul>
-            <Button className="listButtonNew">
+            <Button className="listButtonNew" onClick={handleShow}>
               <img src="../../../icons/plus.svg" alt="Aggiungi" />
               Crea Studente
             </Button>
@@ -94,6 +113,7 @@ export const Studenti = () => {
                 />
               </Alert>
             )}
+            <StudentiModal show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
             <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
               <Pagination>
                 <Pagination.First
