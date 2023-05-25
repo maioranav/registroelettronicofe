@@ -19,6 +19,11 @@ interface ILezioneFetch {
   data: Date | string;
 }
 
+interface ILezioneDelete {
+  accessToken: string;
+  id: number;
+}
+
 const initialState = {
   lezioni: [] as ILezione[],
   status: "idle",
@@ -79,6 +84,24 @@ export const lezioniFetchDataEsatta = createAsyncThunk("fetch-lezioni-dataesatta
     }
   } catch (error) {
     return Promise.reject(error);
+  }
+});
+
+export const deleteLezione = createAsyncThunk("fetch-lezione-delete", async ({ accessToken, id }: ILezioneDelete) => {
+  try {
+    const response = await fetch(url + "/lezioni/" + id, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    if (response.ok) {
+      const data: ILezione = await response.json();
+      return data;
+    } else {
+      const res = await response.json();
+      console.log(res.message);
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

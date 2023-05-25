@@ -7,7 +7,8 @@ import "./Calendar.scss";
 import { format } from "date-fns";
 import it from "date-fns/locale/it";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { lezioniFetchDataEsatta } from "../../app/reducers/lezioniSlice";
+import { deleteLezione, lezioniFetchDataEsatta } from "../../app/reducers/lezioniSlice";
+import { FcOk } from "react-icons/fc";
 
 export const Lezioni = () => {
   const [valueCal, onChangeCal] = useState(new Date());
@@ -15,9 +16,21 @@ export const Lezioni = () => {
   const loginToken = useAppSelector((state) => state.profile?.token);
   const myProfile = useAppSelector((state) => state.myProfile);
   const lezioni = useAppSelector((state) => state.lezioni);
+  const [eliminaLezione, setEliminaLezione] = useState(null as any);
 
   const handleChangeDate = (e: any) => {
     onChangeCal(e);
+  };
+
+  const handleDelete = async () => {
+    await dispatch(deleteLezione({ accessToken: loginToken.accessToken, id: eliminaLezione }));
+    dispatch(
+      lezioniFetchDataEsatta({
+        accessToken: loginToken.accessToken,
+        data: format(valueCal, "yyyy-MM-dd"),
+      })
+    );
+    setEliminaLezione(null);
   };
 
   useEffect(() => {
@@ -54,6 +67,19 @@ export const Lezioni = () => {
                   <p>{lezioni.status !== "failed" && lezioni.lezioni?.length} Lezioni</p>
                 </div>
               </div>
+              {eliminaLezione !== null && (
+                <Alert variant={"warning"} className="my-3">
+                  Stai eliminando {eliminaLezione}. Sei sicuro?{" "}
+                  <FcOk style={{ marginLeft: 10, marginRight: 10, fontSize: 24 }} onClick={handleDelete} />
+                  <img
+                    src="../../../icons/delete.svg"
+                    alt="Elimina"
+                    onClick={() => {
+                      setEliminaLezione(null);
+                    }}
+                  />
+                </Alert>
+              )}
               <ul>
                 {lezioni.status === "failed" && <Alert variant={"danger"}>Servizio non disponibile</Alert>}
                 {lezioni.status === "loading" && <Spinner variant={"primary"} />}
@@ -61,8 +87,20 @@ export const Lezioni = () => {
                   lezioni.lezioni?.length > 0 &&
                   lezioni.lezioni.map((el) => (
                     <li>
-                      <p>{el.orario}:00</p>
-                      <p>{el.corso.name}</p>
+                      <div>
+                        <p>{el.orario}:00</p>
+                        <p>{el.corso.name}</p>
+                      </div>
+                      <div>
+                        {" "}
+                        <img
+                          src="../../../icons/delete.svg"
+                          alt="Elimina"
+                          onClick={() => {
+                            setEliminaLezione(el.id);
+                          }}
+                        />
+                      </div>
                     </li>
                   ))}
               </ul>
