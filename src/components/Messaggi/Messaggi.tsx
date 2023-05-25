@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { deleteMessaggio, messagesFetch } from "../../app/reducers/messageSlice";
 import { FcOk } from "react-icons/fc";
 import { ModalMsgDocente } from "./ModalMsgDocente/ModalMsgDocente";
+import { ModalMsgSegreteria } from "./ModalMsgSegreteria/ModalMsgSegreteria";
+import { profile } from "console";
 
 export const Messaggi = () => {
   const dispatch = useAppDispatch();
@@ -89,19 +91,31 @@ export const Messaggi = () => {
                 {msgs.status !== "failed" &&
                   msgs?.messages?.content.length > 0 &&
                   msgs.messages?.content.map((el) => (
-                    <li key={el.id} className="mb-3">
+                    <li
+                      key={el.id}
+                      className="mb-3"
+                      onClick={() => {
+                        if (loginToken.userType === "Docente") {
+                          if (el.docente?.id === myProfile.id) {
+                            setIdModale(el.id);
+                            handleShow();
+                          }
+                        }
+                      }}
+                    >
                       <div className="d-flex justify-content-center">
                         <img src="./icons/messaggio.svg" alt="Messaggio" className="iconaMessaggio" />
                       </div>
                       <div>
                         <p>{el.corso?.name}</p>
-                        <p>{el.msg.substring(0, 40) + "..."}</p>
+                        <p>{el.msg.substring(0, 80) + "..."}</p>
                         <p>{el.data.toString()}</p>
                       </div>
                     </li>
                   ))}
               </ul>
             </div>
+            <ModalMsgDocente show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
           </Container>
         )}
 
@@ -161,7 +175,7 @@ export const Messaggi = () => {
                     />
                   </Alert>
                 )}
-                <ModalMsgDocente show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
+                <ModalMsgSegreteria show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
                 <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
                   <Pagination>
                     <Pagination.First
