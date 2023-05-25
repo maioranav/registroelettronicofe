@@ -70,8 +70,8 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
 
   const initModal = async () => {
     if (id != null && id !== undefined) {
-      await fetchMessaggio();
       setMsg({ ...mesg, messaggio: { ...mesg.messaggio, docente: { ...myProfile.myProfile } } });
+      await fetchMessaggio();
     } else {
       setMsg({ messaggio: { msg: "", data: new Date(), docente: { ...myProfile.myProfile } } as IMessage, status: "idle" });
     }
@@ -122,7 +122,7 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
               <>
                 <div className="formModalComponent">
                   <label htmlFor="msg">Messaggio: </label>
-                  <input type="text" id="msg" value={mesg.messaggio?.msg} onChange={handleText} />
+                  <input type="text" id="msg" value={mesg.messaggio.msg} onChange={handleText} />
                 </div>
                 <div className="formModalComponent">
                   <label htmlFor="corso">Corso: </label>
