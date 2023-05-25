@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { deleteMessaggio, messagesFetch } from "../../app/reducers/messageSlice";
 import { FcOk } from "react-icons/fc";
+import { ModalMsgDocente } from "./ModalMsgDocente/ModalMsgDocente";
 
 export const Messaggi = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,8 @@ export const Messaggi = () => {
   const [page, setPage] = useState(0);
   const [eliminaMessaggio, setEliminaMessaggio] = useState({ id: null as any, name: "" });
   const myProfile = useAppSelector((state) => state.myProfile?.myProfile);
+  const [show, setShow] = useState(false);
+  const [idModale, setIdModale] = useState(null) as any;
   const location = useLocation();
 
   useEffect(() => {
@@ -53,6 +56,15 @@ export const Messaggi = () => {
     setEliminaMessaggio({ id: null as any, name: "" });
   };
 
+  const handleClose = () => {
+    setShow(false);
+    setIdModale(null);
+    setTimeout(() => {
+      dispatch(messagesFetch({ accessToken: loginToken.accessToken, elNo: 5, sort: "data,desc" }));
+    }, 1000);
+  };
+  const handleShow = () => setShow(true);
+
   return (
     <Row>
       <CustomNav />
@@ -82,7 +94,7 @@ export const Messaggi = () => {
                         <img src="./icons/messaggio.svg" alt="Messaggio" className="iconaMessaggio" />
                       </div>
                       <div>
-                        <p>{el.corso.name}</p>
+                        <p>{el.corso?.name}</p>
                         <p>{el.msg.substring(0, 40) + "..."}</p>
                         <p>{el.data.toString()}</p>
                       </div>
@@ -109,11 +121,18 @@ export const Messaggi = () => {
                     msgs.messages?.content.map((el) => (
                       <li key={el.id} className="d-flex justify-content-between py-2 my-2 align-items-center">
                         <div>
-                          <p className="listData">{`${el.data} - ${el.corso?.name} - Prof. ${el.docente.name.charAt(0)} ${el.docente.surname}`}</p>
+                          <p className="listData">{`${el.data} - ${el.corso?.name} - Prof. ${el.docente?.name.charAt(0)} ${el.docente?.surname}`}</p>
                           <p className="listTitle">{el.msg.substring(0, 100)}</p>
                         </div>
                         <div className="listIcone d-flex">
-                          <img src="../../../icons/modifica.svg" alt="Modifica" />
+                          <img
+                            src="../../../icons/modifica.svg"
+                            alt="Modifica"
+                            onClick={() => {
+                              setIdModale(el.id);
+                              handleShow();
+                            }}
+                          />
                           <img
                             src="../../../icons/delete.svg"
                             alt="Elimina"
@@ -125,7 +144,7 @@ export const Messaggi = () => {
                       </li>
                     ))}
                 </ul>
-                <Button className="listButtonNew">
+                <Button className="listButtonNew" onClick={handleShow}>
                   <img src="../../../icons/plus.svg" alt="Aggiungi" />
                   Crea Messaggio
                 </Button>
@@ -142,6 +161,7 @@ export const Messaggi = () => {
                     />
                   </Alert>
                 )}
+                <ModalMsgDocente show={show} handleClose={handleClose} handleShow={handleShow} id={idModale} />
                 <div className="my-4 d-flex justify-content-center" style={{ border: "none" }}>
                   <Pagination>
                     <Pagination.First

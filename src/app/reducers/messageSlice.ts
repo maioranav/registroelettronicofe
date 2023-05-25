@@ -7,10 +7,10 @@ export const cleanProfile = createAction("CLEAN_PROFILE");
 
 export interface IMessage {
   id?: number;
-  data: Date;
+  data: Date | string;
   msg: string;
-  corso: Corso;
-  docente: Docente;
+  corso?: Corso;
+  docente?: Docente;
 }
 
 const initialState = {

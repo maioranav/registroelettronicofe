@@ -56,7 +56,7 @@ export const DashMsgs = ({ variante }: IDashProps) => {
                 <img src="./icons/messaggio.svg" alt="Messaggio" className="iconaMessaggio" />
               </div>
               <div>
-                <p>{el.corso.name}</p>
+                <p>{el.corso?.name}</p>
                 <p>{el.msg.substring(0, 40) + "..."}</p>
                 <p>{el.data.toString()}</p>
               </div>
