@@ -1,3 +1,4 @@
+import "./NewLezione.scss";
 import { Alert, Button, Modal } from "react-bootstrap";
 import { Corso } from "../../../app/custominterfaces";
 import { useState, useEffect, FormEvent } from "react";
@@ -76,19 +77,19 @@ export const NewLezione = ({ show, handleClose, data }: NewLezioneProp) => {
     <Modal show={show} backdrop="static" keyboard={false}>
       <form onSubmit={handleSubmit}>
         <Modal.Header>
-          <Modal.Title>Scegli un corso</Modal.Title>
+          <Modal.Title>Nuova lezione</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bodyNewLezione">
           {corsiAll.status === "failed" && <Alert variant="danger">Servizio non disponibile</Alert>}
           {corsiAll.status === "idle" && (
             <>
               <div>
                 <label htmlFor="orario">Orario:</label>
-                <div>
-                  <input type="number" max={23} min={0} id="orario" value={orario} onChange={handleOrario} />
-                  <span>:00</span>
-                </div>
+
+                <input type="number" max={23} min={0} id="orario" value={orario} onChange={handleOrario} />
+                <span>:00</span>
               </div>
+
               <div>
                 <label htmlFor="corso">Corso:</label>
                 <select id="corso" onChange={handleCorso}>
