@@ -86,7 +86,7 @@ export const Lezioni = () => {
                   <p>{lezioni.status !== "failed" && lezioni.lezioni?.length} Lezioni</p>
                 </div>
               </div>
-              {eliminaLezione !== null && (
+              {eliminaLezione !== null && loginToken.userType !== "Docente" && loginToken.userType !== "Studente" && (
                 <Alert variant={"warning"} className="my-3">
                   Stai eliminando {eliminaLezione}. Sei sicuro?{" "}
                   <FcOk style={{ marginLeft: 10, marginRight: 10, fontSize: 24 }} onClick={handleDelete} />
@@ -110,13 +110,15 @@ export const Lezioni = () => {
                         <p>{el.orario}:00</p>
                         <p>{el.corso.name}</p>
                       </div>
-                      <img
-                        src="../../../icons/delete.svg"
-                        alt="Elimina"
-                        onClick={() => {
-                          setEliminaLezione(el.id);
-                        }}
-                      />
+                      {loginToken.userType !== "Docente" && loginToken.userType !== "Studente" && (
+                        <img
+                          src="../../../icons/delete.svg"
+                          alt="Elimina"
+                          onClick={() => {
+                            setEliminaLezione(el.id);
+                          }}
+                        />
+                      )}
                     </li>
                   ))}
               </ul>
