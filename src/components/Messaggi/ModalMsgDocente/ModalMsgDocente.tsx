@@ -140,7 +140,7 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
               </>
             )}
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="bottoni">
             <div>
               <span onClick={handleDelete}>Elimina</span>
             </div>

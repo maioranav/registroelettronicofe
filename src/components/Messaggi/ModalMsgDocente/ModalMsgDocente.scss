@@ -20,3 +20,21 @@
     }
   }
 }
+.bottoni {
+  display: flex;
+  justify-content: space-between;
+  > div {
+    span {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        color: red;
+      }
+    }
+    button {
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}
