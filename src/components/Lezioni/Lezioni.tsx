@@ -9,6 +9,7 @@ import it from "date-fns/locale/it";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { deleteLezione, lezioniFetchDataEsatta } from "../../app/reducers/lezioniSlice";
 import { FcOk } from "react-icons/fc";
+import { BsPlusCircleFill } from "react-icons/bs";
 
 export const Lezioni = () => {
   const [valueCal, onChangeCal] = useState(new Date());
@@ -49,7 +50,7 @@ export const Lezioni = () => {
         <Container className="py-5">
           <Row className="d-none d-md-block">
             <Col xs={12} className="greets mb-4">
-              Calendario Lezioni
+              Calendario Lezioni {loginToken.userType !== "Docente" && loginToken.userType !== "Studente" && <BsPlusCircleFill />}
             </Col>
           </Row>
           <Row>
