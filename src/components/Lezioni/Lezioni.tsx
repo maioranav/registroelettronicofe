@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { deleteLezione, lezioniFetchDataEsatta } from "../../app/reducers/lezioniSlice";
 import { FcOk } from "react-icons/fc";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { NewLezione } from "./NewLezione/NewLezione";
 
 export const Lezioni = () => {
   const [valueCal, onChangeCal] = useState(new Date());
@@ -18,6 +19,21 @@ export const Lezioni = () => {
   const myProfile = useAppSelector((state) => state.myProfile);
   const lezioni = useAppSelector((state) => state.lezioni);
   const [eliminaLezione, setEliminaLezione] = useState(null as any);
+  const [showNew, setShowNew] = useState(false);
+
+  const handleCloseNew = () => {
+    setShowNew(false);
+    setTimeout(() => {
+      dispatch(
+        lezioniFetchDataEsatta({
+          accessToken: loginToken.accessToken,
+          data: format(valueCal, "yyyy-MM-dd"),
+        })
+      );
+    }, 1000);
+  };
+
+  const handleShowNew = () => setShowNew(true);
 
   const handleChangeDate = (e: any) => {
     onChangeCal(e);
@@ -50,8 +66,10 @@ export const Lezioni = () => {
         <Container className="py-5">
           <Row className="d-none d-md-block">
             <Col xs={12} className="greets mb-4">
-              Calendario Lezioni {loginToken.userType !== "Docente" && loginToken.userType !== "Studente" && <BsPlusCircleFill />}
+              Calendario Lezioni{" "}
+              {loginToken.userType !== "Docente" && loginToken.userType !== "Studente" && <BsPlusCircleFill onClick={handleShowNew} />}
             </Col>
+            <NewLezione data={valueCal} show={showNew} handleClose={handleCloseNew} />
           </Row>
           <Row>
             <Col xs={12} md={6} lg={3} className="d-flex justify-content-center mb-4">

@@ -6,9 +6,9 @@ const url = process.env.REACT_APP_APIURL;
 export const cleanProfile = createAction("CLEAN_PROFILE");
 
 export interface ILezione {
-  id: number;
-  data: Date;
-  presenze: Studente[];
+  id?: number;
+  data: Date | string;
+  presenze?: Studente[];
   corso: Corso;
   orario: number;
 }
