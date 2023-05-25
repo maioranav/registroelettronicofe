@@ -88,19 +88,17 @@ export const Lezioni = () => {
                   lezioni.lezioni.map((el) => (
                     <li>
                       <div>
+                        {" "}
                         <p>{el.orario}:00</p>
                         <p>{el.corso.name}</p>
                       </div>
-                      <div>
-                        {" "}
-                        <img
-                          src="../../../icons/delete.svg"
-                          alt="Elimina"
-                          onClick={() => {
-                            setEliminaLezione(el.id);
-                          }}
-                        />
-                      </div>
+                      <img
+                        src="../../../icons/delete.svg"
+                        alt="Elimina"
+                        onClick={() => {
+                          setEliminaLezione(el.id);
+                        }}
+                      />
                     </li>
                   ))}
               </ul>

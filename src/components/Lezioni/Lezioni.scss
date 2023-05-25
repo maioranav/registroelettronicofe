@@ -54,21 +54,10 @@
       width: fit-content;
       min-width: 300px;
       padding: 15px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      > p {
-        margin: 0;
-        &:first-child {
-          font-size: 10px;
-          font-weight: 400;
-        }
-        &:last-child {
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
       transition: filter 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       &:nth-child(even) {
         background-color: #fee1bc;
       }
@@ -77,6 +66,22 @@
       }
       &:hover {
         filter: saturate(50%);
+      }
+      > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        > p {
+          margin: 0;
+          &:first-child {
+            font-size: 10px;
+            font-weight: 400;
+          }
+          &:last-child {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
       }
       margin-bottom: 18px;
     }
