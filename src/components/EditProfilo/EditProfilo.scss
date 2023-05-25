@@ -1,0 +1,25 @@
+.profileEdit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  > div {
+    &:first-child {
+      font-size: 1.5em;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    img {
+      width: 200px;
+      scale: 0.9;
+      transition: scale 0.3s ease;
+      &:hover {
+        scale: 1;
+      }
+    }
+    > div:last-child {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

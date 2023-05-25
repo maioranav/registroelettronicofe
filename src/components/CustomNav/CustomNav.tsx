@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap";
 import "./CustomNav.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
 
@@ -8,6 +8,7 @@ export const CustomNav = () => {
   const location = useLocation();
   const loginToken = useAppSelector((state) => state.profile);
   const myProfile = useAppSelector((state) => state.myProfile);
+  const navigate = useNavigate();
   const [homeLink, setHomeLink] = useState("/dashboard");
 
   useEffect(() => {
@@ -27,8 +28,13 @@ export const CustomNav = () => {
           <img src="./logo192.png" alt="Logo" width={"100px"} height={"100px"} />
           UniVincenzo.it
         </div>
-        <div className="d-flex flex-column">
-          <div className="navBarProfile">
+        <div className="d-flex flex-column" style={{ cursor: "pointer" }}>
+          <div
+            className="navBarProfile"
+            onClick={() => {
+              navigate("/profilo");
+            }}
+          >
             <img
               src={loginToken.token?.userType === "Studente" ? "../../../imgs/studenteavatar.png" : "../../../imgs/docenteavatar.png"}
               alt="Profile Avatar"
