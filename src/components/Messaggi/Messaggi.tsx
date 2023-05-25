@@ -59,9 +59,9 @@ export const Messaggi = () => {
   };
 
   const handleClose = () => {
-    setShow(false);
-    setIdModale(null);
     setTimeout(() => {
+      setShow(false);
+      setIdModale(null);
       dispatch(messagesFetch({ accessToken: loginToken.accessToken, elNo: 5, sort: "data,desc" }));
     }, 1000);
   };
@@ -81,7 +81,7 @@ export const Messaggi = () => {
                 </div>
                 <span className="text-primary">
                   {loginToken.userType === "Studente" && <HiBellAlert />}
-                  {loginToken.userType === "Docente" && <BsPlusCircleFill />}
+                  {loginToken.userType === "Docente" && <BsPlusCircleFill onClick={handleShow} />}
                 </span>
               </h5>
               <ul>

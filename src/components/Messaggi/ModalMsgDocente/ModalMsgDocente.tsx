@@ -15,9 +15,8 @@ interface DocentiPropModal {
 
 export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPropModal) => {
   const loginToken = useAppSelector((state) => state.profile?.token);
+  const myProfile = useAppSelector((state) => state.myProfile);
   const [mesg, setMsg] = useState({ messaggio: { msg: "", data: new Date() } as IMessage, status: "idle" });
-  const [allDocenti, setAllDocenti] = useState([] as Docente[]);
-  const [corsiEnabled, setCorsiEnabled] = useState([] as Corso[]);
 
   const fetchMessaggio = async () => {
     try {
@@ -33,6 +32,22 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
       }
     } catch (error) {
       setMsg({ messaggio: { msg: "", data: new Date() }, status: "failed" });
+    }
+  };
+
+  const fetchDelete = async () => {
+    try {
+      const response = await fetch(process.env.REACT_APP_APIURL + "/msgs/id/" + id, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + loginToken.accessToken },
+      });
+      if (!response.ok) {
+        console.log("Errore nella richiesta");
+        setMsg({ ...mesg, status: "failed" });
+      }
+    } catch (error) {
+      console.log(error);
+      setMsg({ ...mesg, status: "failed" });
     }
   };
 
@@ -53,51 +68,12 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
     }
   };
 
-  const fetchAllDocenti = async () => {
-    try {
-      let response = await fetch(process.env.REACT_APP_APIURL + "/docenti/all", {
-        method: "GET",
-        headers: { Authorization: "Bearer " + loginToken.accessToken },
-      });
-      if (response.ok) {
-        const data: Docente[] = await response.json();
-        setAllDocenti(data);
-        return data;
-      } else {
-        const res = await response.json();
-        console.log(res.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchCorsiDocenti = async () => {
-    try {
-      let response = await fetch(process.env.REACT_APP_APIURL + "/corsi/docente/" + mesg.messaggio.docente?.id, {
-        method: "GET",
-        headers: { Authorization: "Bearer " + loginToken.accessToken },
-      });
-      if (response.ok) {
-        const data: Corso[] = await response.json();
-        setCorsiEnabled(data);
-        return data;
-      } else {
-        const res = await response.json();
-        console.log(res.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const initModal = async () => {
-    await fetchAllDocenti();
     if (id != null && id !== undefined) {
       await fetchMessaggio();
-      await fetchCorsiDocenti();
+      setMsg({ ...mesg, messaggio: { ...mesg.messaggio, docente: { ...myProfile.myProfile } } });
     } else {
-      setMsg({ messaggio: { msg: "", data: new Date() } as IMessage, status: "idle" });
+      setMsg({ messaggio: { msg: "", data: new Date(), docente: { ...myProfile.myProfile } } as IMessage, status: "idle" });
     }
   };
 
@@ -118,16 +94,17 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
   const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMsg({ ...mesg, messaggio: { ...mesg.messaggio, msg: e.target.value } });
   };
-  const handleDocente = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMsg({ ...mesg, messaggio: { ...mesg.messaggio, docente: allDocenti?.find((el) => el.id + "" === e.target.value) } });
-    fetchCorsiDocenti();
-  };
   const handleData = (e: React.ChangeEvent<HTMLDataElement>) => {
     setMsg({ ...mesg, messaggio: { ...mesg.messaggio, data: format(new Date(e.target.value), "yyyy-MM-dd") } });
   };
 
   const handleCorso = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMsg({ ...mesg, messaggio: { ...mesg.messaggio, corso: corsiEnabled?.find((el) => el.id + "" === e.target.value) } });
+    setMsg({ ...mesg, messaggio: { ...mesg.messaggio, corso: myProfile.myProfile?.corsi?.find((el) => el.id + "" === e.target.value) } });
+  };
+
+  const handleDelete = () => {
+    fetchDelete();
+    handleClose();
   };
 
   return (
@@ -148,19 +125,10 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
                   <input type="text" id="msg" value={mesg.messaggio?.msg} onChange={handleText} />
                 </div>
                 <div className="formModalComponent">
-                  <label htmlFor="docente">Docente: </label>
-                  <select id="docente" onChange={handleDocente}>
-                    <option value={0}>Seleziona un docente</option>
-                    {allDocenti.map((el) => (
-                      <option value={el.id}>{el.name + " " + el.surname}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="formModalComponent">
                   <label htmlFor="corso">Corso: </label>
                   <select id="corso" onChange={handleCorso}>
                     <option value={0}>Seleziona un corso</option>
-                    {corsiEnabled?.map((el) => (
+                    {myProfile.myProfile?.corsi?.map((el) => (
                       <option value={el.id}>{el.name}</option>
                     ))}
                   </select>
@@ -173,12 +141,17 @@ export const ModalMsgDocente = ({ id, show, handleClose, handleShow }: DocentiPr
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Chiudi
-            </Button>
-            <Button variant="primary" type="submit" onClick={handleClose}>
-              Salva
-            </Button>
+            <div>
+              <span onClick={handleDelete}>Elimina</span>
+            </div>
+            <div>
+              <Button variant="secondary" onClick={handleClose}>
+                Chiudi
+              </Button>
+              <Button variant="primary" type="submit" onClick={handleClose}>
+                Salva
+              </Button>
+            </div>
           </Modal.Footer>
         </form>
       </Modal>
