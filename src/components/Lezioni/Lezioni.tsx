@@ -11,6 +11,7 @@ import { deleteLezione, lezioniFetchDataEsatta } from "../../app/reducers/lezion
 import { FcOk } from "react-icons/fc";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { NewLezione } from "./NewLezione/NewLezione";
+import { Presenze } from "../Presenze/Presenze";
 
 export const Lezioni = () => {
   const [valueCal, onChangeCal] = useState(new Date());
@@ -20,6 +21,8 @@ export const Lezioni = () => {
   const lezioni = useAppSelector((state) => state.lezioni);
   const [eliminaLezione, setEliminaLezione] = useState(null as any);
   const [showNew, setShowNew] = useState(false);
+  const [showPresenze, setShowPresenze] = useState(false);
+  const [idPresenze, setIdPresenze] = useState(0);
 
   const handleCloseNew = () => {
     setShowNew(false);
@@ -31,6 +34,10 @@ export const Lezioni = () => {
         })
       );
     }, 1000);
+  };
+
+  const handleClosePresenze = () => {
+    setShowPresenze(false);
   };
 
   const handleShowNew = () => setShowNew(true);
@@ -105,7 +112,16 @@ export const Lezioni = () => {
                 {lezioni.status !== "failed" &&
                   lezioni.lezioni?.length > 0 &&
                   lezioni.lezioni.map((el) => (
-                    <li>
+                    <li
+                      onClick={
+                        loginToken.userType !== "Studente"
+                          ? () => {
+                              setIdPresenze(el.id as number);
+                              setShowPresenze(true);
+                            }
+                          : () => {}
+                      }
+                    >
                       <div>
                         <p>{el.orario}:00</p>
                         <p>{el.corso.name}</p>
@@ -122,6 +138,7 @@ export const Lezioni = () => {
                     </li>
                   ))}
               </ul>
+              <Presenze id={idPresenze} show={showPresenze} handleClose={handleClosePresenze} />
             </Col>
           </Row>
         </Container>
