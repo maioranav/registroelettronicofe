@@ -20,7 +20,7 @@ I seguenti comandi sono eseguibili da terminale:
 ### `npm start`
 
 Avvia l'applicazione in modalità DEVELOPMENTE.\
-Apri http://localhost:3000 nel browser per accedere.
+Apri https://localhost:3000 nel browser per accedere.
 
 Eventuali modifiche al codice vengono refreshate live.\
 ESLint blocca e mostra sul browser eventuali errori.
@@ -38,3 +38,7 @@ Your app is ready to be deployed!
 Il progetto deriva da una discussione con Beatrice Chianese, una persona a me molto cara, con la quale è emerso che la sua App Universitaria è molto confusionaria e quindi, cito testualemtente "Puoi fare un'app dell'università dove si capisce qualcosa".\
 La UI è stata progettata visivamente da Antonio Calderone, mio caro amico che ha creduto nel mio progetto mettendosi a disposizione in maniera repentina.\
 Un ringraziamento enorme va invece ai miei docenti e teaching Assistant in Epicode, che mi hanno supportato e insegnato quello che so fare, e con i quali ho potuto esaltare le mie capacità di ProblemSolving in questo progetto nello specifico. (Su questo progetto specificatamente: Lidia Kovac, Rino Marra).
+
+## SSL
+
+Il software viene avviato di default in modalità HTTPs ma non dispone di certificati all'apertura. Potrebbe essere necessario implementare dei certificati di sicurezza o aggiungere un'eccezione al tuo browser/antivirus per permettere l'apertura della pagina web.
