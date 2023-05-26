@@ -35,6 +35,6 @@ Your app is ready to be deployed!
 
 ## Ringraziamenti
 
-Il progetto deriva da una discussione con la mia amica Beatrice Chianese, durante la quale è emerso che la sua App Universitaria è molto confusionaria.\
+Il progetto deriva da una discussione con Beatrice Chianese, una persona a me molto cara, con la quale è emerso che la sua App Universitaria è molto confusionaria e quindi, cito testualemtente "Puoi fare un'app dell'università dove si capisce qualcosa".\
 La UI è stata progettata visivamente da Antonio Calderone, mio caro amico che ha creduto nel mio progetto mettendosi a disposizione in maniera repentina.\
 Un ringraziamento enorme va invece ai miei docenti e teaching Assistant in Epicode, che mi hanno supportato e insegnato quello che so fare, e con i quali ho potuto esaltare le mie capacità di ProblemSolving in questo progetto nello specifico. (Su questo progetto specificatamente: Lidia Kovac, Rino Marra).
