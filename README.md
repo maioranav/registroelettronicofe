@@ -42,3 +42,7 @@ Un ringraziamento enorme va invece ai miei docenti e teaching Assistant in Epico
 ## SSL
 
 Il software viene avviato di default in modalità HTTPs ma non dispone di certificati all'apertura. Potrebbe essere necessario implementare dei certificati di sicurezza o aggiungere un'eccezione al tuo browser/antivirus per permettere l'apertura della pagina web.
+
+## Support PWA
+
+E' gia disponibile la funzionalità di PWA, seppur basica. Per testare la funzionalità PWA in ambiente DEVELOPMENT è necessario disattivare il supporto SSL dal file .env e modificare il PUBLIC_URL in http (al posto di HTTPs). Eseguire quindi la build del progetto con `npm run build` e avviare il progetto con `npx serve build`. Se `serve` non è installato, il gestore pacchetti ti chiederà di installarlo.
