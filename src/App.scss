@@ -7,3 +7,18 @@
   --bs-gutter-x: unset !important;
   --bs-gutter-y: unset !important;
 }
+
+.modal-dialog {
+  .btn-secondary {
+    background-color: #e6e6e6;
+    &:hover {
+      background-color: #bebebe;
+    }
+  }
+  .btn-primary {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}
