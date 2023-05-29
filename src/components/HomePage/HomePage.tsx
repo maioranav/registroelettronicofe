@@ -21,7 +21,7 @@ export const HomePage = () => {
         <Col xs={12} lg={6} className="leftColumn">
           <div>
             <LazyLoadImage
-              src="http://p-hold.com/castle/800/800"
+              src="../../../imgs/studentehome.png"
               alt="Random Pic"
               effect="blur"
               width={"800"}
@@ -29,10 +29,9 @@ export const HomePage = () => {
               afterLoad={() => {
                 setShownImage(true);
               }}
-              className="rounded-circle homeRandomImg"
+              className="d-none d-lg-block homeRandomImg"
             ></LazyLoadImage>
           </div>
-          {shownImage && <h6 className="text-info text-center">Random Picture from p-Hold</h6>}
         </Col>
         <Col xs={12} lg={6} className="d-flex p-5 justify-content-center rightColumn flex-column align-items-center align-items-md-start">
           <h1>UniVincenzo.it</h1>
