@@ -71,7 +71,7 @@ export const Login = () => {
               <input type="password" className="form-control mt-1" placeholder="Inserisci password" value={password} onChange={passHandler} />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary loginButton">
                 Accedi
               </button>
               {loginToken.status === "loading" && <Spinner animation="border" variant="primary" />}
