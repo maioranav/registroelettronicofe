@@ -104,7 +104,7 @@ export const NewLezione = ({ show, handleClose, data }: NewLezioneProp) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Chiudi
           </Button>
           <Button variant="primary" type="submit">
             Aggiungi

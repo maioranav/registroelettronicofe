@@ -1,0 +1,12 @@
+.corsomodale {
+  label {
+    width: 100px;
+  }
+  input {
+    width: 250px;
+    margin: 10px 0;
+  }
+  select {
+    @extend input;
+  }
+}

@@ -102,7 +102,7 @@ export const CorsiModal = ({ show, handleClose, id }: CorsiModalProps) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal className="corsomodale" show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit}>
           <Modal.Header>
             {id === null && <Modal.Title>Crea nuovo corso</Modal.Title>}
