@@ -12,6 +12,7 @@ Il software è collegato ad un backend scritto in Java SpringBoot sempre da me r
 - Typescript
 - Redux - Persist - Encrypt
 - Bootstrap
+- PWA
 
 ## Script Disponibili
 
