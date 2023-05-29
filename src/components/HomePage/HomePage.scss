@@ -3,7 +3,7 @@
 .leftColumn {
   height: 100dvh;
   @media screen and (max-width: 990px) {
-    height: 75dvh;
+    height: 50dvh;
   }
   display: flex;
   flex-direction: column;
@@ -27,6 +27,26 @@
 .rightColumn {
   height: 100dvh;
   @media screen and (max-width: 990px) {
-    height: 25dvh;
+    height: 50dvh;
+  }
+}
+
+.loginHome {
+  position: relative;
+  transition: all 0.3s ease;
+  color: white;
+  > svg {
+    position: absolute;
+    top: 27%;
+    right: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  &:hover {
+    color: white;
+    padding-right: 35px;
+    > svg {
+      opacity: 1;
+    }
   }
 }

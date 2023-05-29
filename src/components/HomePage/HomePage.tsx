@@ -5,6 +5,7 @@ import "./HomePage.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useDocumentTitle from "../../app/useDocumentTitle";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 export const HomePage = () => {
   useDocumentTitle("Home");
@@ -31,13 +32,35 @@ export const HomePage = () => {
               }}
               className="d-none d-lg-block homeRandomImg"
             ></LazyLoadImage>
+            <LazyLoadImage
+              src="../../../logo.png"
+              alt="Random Pic"
+              effect="blur"
+              width={"100"}
+              height={"100"}
+              afterLoad={() => {
+                setShownImage(true);
+              }}
+              className="d-block d-lg-none homeRandomImg"
+            ></LazyLoadImage>
           </div>
         </Col>
         <Col xs={12} lg={6} className="d-flex p-5 justify-content-center rightColumn flex-column align-items-center align-items-md-start">
-          <h1>UniVincenzo.it</h1>
+          <LazyLoadImage
+            src="../../../logo.png"
+            alt="Random Pic"
+            effect="blur"
+            width={"100"}
+            height={"100"}
+            afterLoad={() => {
+              setShownImage(true);
+            }}
+            className="d-none d-lg-block homeRandomImg my-2"
+          ></LazyLoadImage>
+          <h1 className="my-lg-4">UniVincenzo.it</h1>
           <h3 className="d-none d-md-block w-75">Dove Innovazione e Tecnologia, rappresentano il futuro!</h3>
-          <Button className="mt-4 rounded-4" onClick={handleClick}>
-            Accedi
+          <Button className="mt-4 rounded-4 loginHome" onClick={handleClick}>
+            Accedi <AiOutlineArrowRight />
           </Button>
         </Col>
       </Row>
