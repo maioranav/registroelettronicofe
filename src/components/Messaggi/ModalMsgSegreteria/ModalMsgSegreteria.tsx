@@ -95,7 +95,6 @@ export const ModalMsgSegreteria = ({ id, show, handleClose, handleShow }: Docent
     await fetchAllDocenti();
     if (id != null && id !== undefined) {
       await fetchMessaggio();
-      await fetchCorsiDocenti();
     } else {
       setMsg({ messaggio: { msg: "", data: new Date() } as IMessage, status: "idle" });
     }
@@ -114,6 +113,10 @@ export const ModalMsgSegreteria = ({ id, show, handleClose, handleShow }: Docent
   useEffect(() => {
     initModal();
   }, [id]);
+
+  useEffect(() => {
+    fetchCorsiDocenti();
+  }, [mesg.messaggio.docente?.id]);
 
   const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMsg({ ...mesg, messaggio: { ...mesg.messaggio, msg: e.target.value } });
