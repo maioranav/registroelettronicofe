@@ -1,4 +1,4 @@
-import { Alert, Button, Modal } from "react-bootstrap";
+import { Alert, Button, Modal, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { ILezione } from "../../app/reducers/lezioniSlice";
 import "./Presenze.scss";
@@ -39,9 +39,9 @@ export const Presenze = ({ id, show, handleClose }: PresenzeProps) => {
     }
   };
 
-  const fetchStudenti = async (idCorso: number) => {
+  const fetchStudenti = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_APIURL + "/studenti/corsi/" + idCorso, {
+      const response = await fetch(process.env.REACT_APP_APIURL + "/studenti/corsi/" + lezione.lezione.corso?.id, {
         method: "GET",
         headers: { Authorization: "Bearer " + loginToken.accessToken },
       });
@@ -73,29 +73,30 @@ export const Presenze = ({ id, show, handleClose }: PresenzeProps) => {
 
   const initModal = async () => {
     await fetchLezione();
-    await fetchStudenti(lezione.lezione.corso?.id as number);
   };
 
   useEffect(() => {
-    initModal();
-  }, [id]);
+    if (id !== undefined) {
+      initModal();
+    }
+  }, [id, show]);
+
+  useEffect(() => {
+    fetchStudenti();
+  }, [lezione.lezione.corso?.id]);
 
   const handlePresenza = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let arrayPresenti;
-    if (lezione.lezione?.presenze?.find((el) => el.id + "" === e.target.value) !== undefined) {
-      let filtered = studenti.studenti.filter((el) => el.id + "" !== e.target.value);
-      setLezione({ ...lezione, lezione: { ...lezione.lezione, presenze: filtered } });
-    } else {
-      let studente = studenti.studenti.find((el) => el.id + "" === e.target.value);
-      if (lezione.lezione.presenze !== undefined && lezione.lezione !== undefined) {
-        arrayPresenti = lezione.lezione.presenze;
+    let presenzefetchate = [];
+    let studentecambiato = studenti.studenti.find((el) => el.id + "" === e.target.value);
+    if (studentecambiato !== undefined) {
+      presenzefetchate = lezione.lezione?.presenze != undefined ? [...lezione.lezione?.presenze] : [];
+      if (presenzefetchate?.find((el) => el.id === studentecambiato?.id) !== undefined) {
+        let filtered = presenzefetchate.filter((el) => el.id !== studentecambiato?.id);
+        setLezione({ ...lezione, lezione: { ...lezione.lezione, presenze: filtered } });
       } else {
-        arrayPresenti = [] as Studente[];
+        studentecambiato !== undefined && presenzefetchate.push(studentecambiato);
+        setLezione({ ...lezione, lezione: { ...lezione.lezione, presenze: presenzefetchate } });
       }
-      if (studente !== undefined) {
-        arrayPresenti.push(studente);
-      }
-      setLezione({ ...lezione, lezione: { ...lezione.lezione, presenze: arrayPresenti } });
     }
   };
 
@@ -108,9 +109,10 @@ export const Presenze = ({ id, show, handleClose }: PresenzeProps) => {
           </Modal.Header>
           <Modal.Body className="bodyLezione">
             {lezione.status === "failed" && <Alert variant="danger">Servizio non disponibile</Alert>}
+            {lezione.status === "loading" && <Spinner variant="primary" />}
             {lezione.status === "idle" && (
               <>
-                <div>Titolo Lezione</div>
+                <div>{lezione.lezione.corso.name}</div>
                 <div>Gestione Presenze:</div>
                 <ul>
                   {studenti.studenti.map((el) => (
