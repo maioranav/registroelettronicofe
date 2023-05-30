@@ -1,0 +1,15 @@
+.xAxis,
+.yAxis {
+  visibility: hidden;
+}
+.titoloGrafico {
+  display: flex;
+  align-items: center;
+  svg {
+    font-size: 1.5em;
+    color: #7280ff;
+
+    filter: drop-shadow(2px 2px 2px rgb(185, 232, 253));
+    margin-right: 10px;
+  }
+}

@@ -1,9 +1,10 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 import "./PresenzeChart.scss";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
 import { presenzeFetch } from "../../app/reducers/presenzeSlice";
 import { Alert, Spinner } from "react-bootstrap";
+import { IoIosPeople } from "react-icons/io";
 
 export const PresenzeChart = () => {
   const presenze = useAppSelector((state) => state.presenze);
@@ -38,15 +39,28 @@ export const PresenzeChart = () => {
       {presenze.status === "loading" && <Spinner variant={"primary"} />}
       {presenze.status === "idle" && presenze.lezioni.length < 1 && <Alert variant={"primary"}>Dati non sufficienti</Alert>}
       {presenze.status === "idle" && presenze.lezioni.length > 0 && (
-        <ResponsiveContainer width="100%" height={270}>
-          <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-            <XAxis dataKey="Data" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Line type="monotone" dataKey="Presenze" stroke="#8884d8" fill="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
+        <>
+          {" "}
+          <h5 className="titoloGrafico">
+            <IoIosPeople />
+            Grafico presenze
+          </h5>
+          <ResponsiveContainer width="100%" height={270}>
+            <AreaChart data={data} margin={{ top: 0, right: 30, left: -60, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#7280ff" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#7280ff" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="Data" />
+              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Area type="monotone" dataKey="Presenze" fillOpacity={1} fill="url(#colorUv)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </>
       )}
     </>
   );

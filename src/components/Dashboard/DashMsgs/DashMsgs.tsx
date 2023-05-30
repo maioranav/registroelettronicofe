@@ -38,7 +38,6 @@ export const DashMsgs = ({ variante }: IDashProps) => {
         </div>
         <span className="text-primary">
           {variante === "studente" && <HiBellAlert />}
-          {variante === "docente" && <BsPlusCircleFill />}
           <Link to="/messaggi">
             <IoIosArrowForward />
           </Link>
