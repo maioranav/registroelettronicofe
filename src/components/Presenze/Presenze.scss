@@ -1,0 +1,30 @@
+.titoloLezione {
+  font-size: 1.5em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+  span {
+    background-color: #7280ff;
+    color: white;
+    font-size: 0.6em;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+}
+
+.elencoPresenze {
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    input {
+      margin-right: 8px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}

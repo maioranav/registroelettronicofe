@@ -112,9 +112,12 @@ export const Presenze = ({ id, show, handleClose }: PresenzeProps) => {
             {lezione.status === "loading" && <Spinner variant="primary" />}
             {lezione.status === "idle" && (
               <>
-                <div>{lezione.lezione.corso.name}</div>
-                <div>Gestione Presenze:</div>
-                <ul>
+                <div className="titoloLezione">
+                  {lezione.lezione.corso.name}
+                  <span>{lezione.lezione.data.toLocaleString()}</span>
+                </div>
+                <h6 className="mb-3">Gestione Presenze:</h6>
+                <ul className="elencoPresenze">
                   {studenti.studenti.map((el) => (
                     <li key={el.id}>
                       <input
